@@ -1,11 +1,13 @@
 import { NextComponentType } from "next";
+import { Title, NavMenu } from "../components/Navigation";
 
 const Verify: NextComponentType = () => {
     return (
-        <div className="text-center">
-            Hello
+        <div>
+            <Title></Title>
+            <NavMenu></NavMenu>
         </div>
-    )
-}
+    );
+};
 
 export default Verify;
