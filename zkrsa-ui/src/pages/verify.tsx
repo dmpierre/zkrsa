@@ -2,7 +2,7 @@ import { NextComponentType } from "next";
 
 const Verify: NextComponentType = () => {
     return (
-        <div>
+        <div className="text-center">
             Hello
         </div>
     )

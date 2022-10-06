@@ -1,7 +1,6 @@
 import type { NextComponentType, NextPage } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
-import styles from '../styles/Home.module.css';
 
 const Title: NextComponentType = () => {
   return (
@@ -18,7 +17,7 @@ const InputHash: NextComponentType = () => {
   return (
     <div className='ml-10 my-10'>
       <div>Enter hash</div>
-      <input className='border-black border-2' type="text" onChange={(e) => setuserInput(e.target.value) } />
+      <input className='border-black border-2' type="text" onChange={(e) => setuserInput(e.target.value)} />
     </div>
   );
 };
@@ -28,37 +27,42 @@ const InputSignature: NextComponentType = () => {
     <div className='ml-10 my-10'>
       <div>Enter signature</div>
       <input className='border-black border-2' type="text" name="" id="" />
-    </div> 
-  )
-}
+    </div>
+  );
+};
 
-const InputPublicKey: NextComponentType = () => {
-  const [userInput, setuserInput] = useState("")
+const InputPublicKey: NextComponentType = () => {
+  const [ userInput, setuserInput ] = useState("");
   return (
     <div className='ml-10 my-10'>
       <div>Enter Public Key</div>
       <input className='border-black border-2' type="text" name="" id="" />
     </div>
-  )
-}
+  );
+};
 
 const ButtonGenerateProof: NextComponentType = () => {
   return (
     <div className='ml-10 my-10'>
       <button className='border-black border-2'>Generate proof</button>
     </div>
-  )
-}
+  );
+};
 
-const NavMenu: NextComponentType = ()  => {
+const NavMenu: NextComponentType = () => {
   return (
-    <div>
-      <Link href="/verify">
-        <a >Verify</a>
-      </Link>
-    </div>  
-  )
-}
+    <div className='text-center'>
+      <div className='flex justify-center'>
+        <Link href="/">
+          <a className='mr-5'>Prove</a>
+        </Link>
+        <Link href="/verify">
+          <a className='ml-5'>Verify</a>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const Home: NextPage = () => {
   return (
