@@ -4,11 +4,10 @@ import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 export const textEncoder = new TextEncoder();
 
 interface TextInputProps {
-    text: string | null;
     setuserText: Dispatch<SetStateAction<string | null>>;
 }
 
-export const InputText: FunctionComponent<TextInputProps> = ({text, setuserText}) => {
+export const InputText: FunctionComponent<TextInputProps> = ({setuserText}) => {
 
     return (
         <div className="ml-10 my-10">
@@ -19,7 +18,7 @@ export const InputText: FunctionComponent<TextInputProps> = ({text, setuserText}
 };
 
 export const InputHash: NextComponentType = () => {
-    const [ userInput, setuserInput ] = useState("");
+    const [ userInput, setuserInput ] = useState<null | string>(null);
     return (
         <div className='ml-10 my-10'>
             <div>Enter hash</div>

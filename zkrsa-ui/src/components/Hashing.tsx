@@ -39,7 +39,7 @@ export const HashMessage: FunctionComponent = () => {
 
     return (
         <>
-            <InputText text={userText} setuserText={setuserText} ></InputText >
+            <InputText setuserText={setuserText} ></InputText >
             <HashText text={userText} hashValue={hashValue} sethashValue={sethashValue}></HashText>
         </>
     );

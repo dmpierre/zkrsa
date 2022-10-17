@@ -9,13 +9,13 @@ import { useState } from "react";
  * @returns 
  */
 const Generate: NextComponentType = () => {
-    const [keypair, setkeypair] = useState(null)
+    const [ keyPair, setkeyPair ] = useState<null | CryptoKeyPair>(null);
     return (
         <div>
             <Title></Title>
             <NavMenu></NavMenu>
             <HashMessage></HashMessage>
-            <GenerateKeyPair keypair={keypair}></GenerateKeyPair>
+            <GenerateKeyPair setkeyPair={setkeyPair}></GenerateKeyPair>
         </div>
     );
 };
