@@ -7,7 +7,7 @@ interface TextInputProps {
     setuserText: Dispatch<SetStateAction<string | null>>;
 }
 
-export const InputText: FunctionComponent<TextInputProps> = ({setuserText}) => {
+export const InputText: FunctionComponent<TextInputProps> = ({ setuserText }) => {
 
     return (
         <div className="ml-10 my-10">
@@ -17,31 +17,41 @@ export const InputText: FunctionComponent<TextInputProps> = ({setuserText}) => {
     );
 };
 
-export const InputHash: NextComponentType = () => {
-    const [ userInput, setuserInput ] = useState<null | string>(null);
+interface InputHash {
+    sethash: Dispatch<SetStateAction<string | null>>;
+}
+
+export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
         <div className='ml-10 my-10'>
             <div>Enter hash</div>
-            <input className='border-black border-2' type="text" onChange={(e) => setuserInput(e.target.value)} />
+            <input className='border-black border-2' type="text" onChange={(e) => sethash(e.target.value)} />
         </div>
     );
 };
 
-export const InputSignature: NextComponentType = () => {
+interface InputSignature {
+    setsignature: Dispatch<SetStateAction<string | null>>;
+}
+
+export const InputSignature: FunctionComponent<InputSignature> = ({ setsignature }) => {
     return (
         <div className='ml-10 my-10'>
             <div>Enter signature</div>
-            <input className='border-black border-2' type="text" name="" id="" />
+            <input className='border-black border-2' type="text" name="" id="" onChange={(e) => setsignature(e.target.value)} />
         </div>
     );
 };
 
-export const InputPublicKey: NextComponentType = () => {
-    const [ userInput, setuserInput ] = useState("");
+interface InputPublicKey {
+    setpublicKey: Dispatch<SetStateAction<string | null>>;
+}
+
+export const InputPublicKey: FunctionComponent<InputPublicKey> = ({ setpublicKey }) => {
     return (
         <div className='ml-10 my-10'>
             <div>Enter Public Key</div>
-            <input className='border-black border-2' type="text" name="" id="" />
+            <input className='border-black border-2' type="text" name="" id="" onChange={(e) => setpublicKey(e.target.value)} />
         </div>
     );
 };

@@ -5,7 +5,7 @@ const ab2str = require("arraybuffer-to-string");
 
 async function main() {
   const ec = new TextEncoder();
-  const message = "this is a test";
+  const message = "hello world";
 
   const { publicKey, privateKey } = await crypto.webcrypto.subtle.generateKey(
     {
