@@ -19,7 +19,8 @@ const Home: NextPage = () => {
       <InputHash sethash={sethash}></InputHash>
       <InputSignature setsignature={setsignature}></InputSignature>
       <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
-      <ButtonGenerateProof setproof={setproof}></ButtonGenerateProof>
+      <ButtonGenerateProof hash={hash} signature={signature}
+                  publicKey={publicKey} setproof={setproof}></ButtonGenerateProof>
     </div>
   );
 };

@@ -4,9 +4,12 @@ import { generateRSAKeyPair } from "../utils/crypto";
 
 interface ButtonGenerateProof {
   setproof: Dispatch<SetStateAction<string | null>>;
+  hash: string | null;
+  signature: string | null;
+  publicKey: string | null;
 }
 
-export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setproof }) => {
+export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setproof, hash, signature, publicKey }) => {
 
   return (
     <div className='ml-10 my-10'>
