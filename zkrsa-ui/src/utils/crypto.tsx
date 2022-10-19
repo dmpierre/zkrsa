@@ -1,3 +1,5 @@
+import bigInt from "big-integer";
+
 export const generateRSAKeyPair = async (): Promise<CryptoKeyPair> => {
     const keyPair = await window.crypto.subtle.generateKey({
         name: "RSASSA-PKCS1-v1_5",
@@ -26,3 +28,20 @@ export const sign = async (RSAKeyPair: CryptoKeyPair, message: string, textEncod
     );
     return signature
 };
+
+//@ts-ignore
+function splitToWords(x, w, n, name) {
+    let t = bigInt(x);
+    w = bigInt(w);
+    n = bigInt(n);
+    const words = {};
+    for (let i = 0; i < n; ++i) {
+        //@ts-ignore
+        words[`${name}[${i}]`] = `${t.mod(bigInt(2).pow(w))}`;
+        t = t.divide(bigInt(2).pow(w));
+    }
+    if (!t.isZero()) {
+        throw `Number ${x} does not fit in ${w * n} bits`;
+    }
+    return words;
+}
