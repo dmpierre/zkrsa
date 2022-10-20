@@ -1,3 +1,3 @@
 include "./rsa_verify.circom";
 
-component main = RsaVerifyPkcs1v15(32, 32, 32, 4);
+component main = RsaVerifyPkcs1v15(64, 32, 17, 4);

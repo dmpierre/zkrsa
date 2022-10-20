@@ -30,7 +30,7 @@ export const sign = async (RSAKeyPair: CryptoKeyPair, message: string, textEncod
 };
 
 //@ts-ignore
-function splitToWords(x, w, n, name) {
+export function splitToWords(x, w, n, name) {
     let t = bigInt(x);
     w = bigInt(w);
     n = bigInt(n);

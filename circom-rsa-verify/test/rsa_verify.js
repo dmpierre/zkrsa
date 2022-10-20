@@ -36,6 +36,7 @@ describe("Rsa pkcs1v15 verify", () => {
             splitToWords(modulus, 64, 32, "modulus"),
             splitToWords(hashed, 64, 4, "hashed"),
         );
+        console.log(rsa_pkvs1v15_circuit)
         console.log(input)
         const witness = rsa_pkvs1v15_circuit.calculateWitness(input);
     });
