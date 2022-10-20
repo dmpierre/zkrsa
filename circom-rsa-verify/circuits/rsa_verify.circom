@@ -1,5 +1,5 @@
 include "./pow_mod.circom";
-include "../circom-bigint/circomlib/circuits/bitify.circom"
+include "../circom-bigint/circomlib/circuits/bitify.circom";
 
 // Pkcs1v15 + Sha256
 // exp 65537
