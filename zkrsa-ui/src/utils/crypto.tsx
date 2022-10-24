@@ -26,18 +26,19 @@ export const sign = async (RSAKeyPair: CryptoKeyPair, message: string, textEncod
         RSAKeyPair.privateKey,
         textEncoder.encode(message)
     );
-    return signature
+    return signature;
 };
 
 //@ts-ignore
-export function splitToWords(x, w, n, name) {
+export function splitToWords (x, w, n, name) {
+    console.log(name);
     let t = bigInt(x);
     w = bigInt(w);
     n = bigInt(n);
     const words = {};
     for (let i = 0; i < n; ++i) {
         //@ts-ignore
-        words[`${name}[${i}]`] = `${t.mod(bigInt(2).pow(w))}`;
+        words[ `${name}[${i}]` ] = `${t.mod(bigInt(2).pow(w))}`;
         t = t.divide(bigInt(2).pow(w));
     }
     if (!t.isZero()) {
