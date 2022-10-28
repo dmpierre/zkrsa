@@ -7,3 +7,7 @@ The `circom-rsa-verify` folder contains all necessary circuits and tests for car
 The `zkrsa-ui` contains the UI for generating or verifying proofs of valid RSA signatures using circom.
 
 
+### Notes
+
+- Grant proposal V2: https://hackmd.io/DoZPolTRRN-WNYheT7MauA
+- Milestone 1 notes: https://hackmd.io/@yHZa50IsRz6mkHZ4ZafYqg/HJGNqzYNo
