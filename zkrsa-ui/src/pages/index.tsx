@@ -10,7 +10,7 @@ interface StatusVKey {
 export const StatusVKey: FunctionComponent<StatusVKey> = ({ vkey }) => {
 
   return (
-    <div>
+    <div className='flex justify-center'>
       {vkey ? "Ready to generate proof" : "Verifier not initialized yet."}
     </div>
   );
@@ -29,16 +29,21 @@ const Home: NextPage = () => {
       <Title></Title>
       <NavMenu></NavMenu>
       <StatusVKey vkey={vkeyProof}></StatusVKey>
-      <InputHash sethash={sethash}></InputHash>
-      <InputSignature setsignature={setsignature}></InputSignature>
-      <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
-      <ButtonInitializeVerifier setvkeyVerifier={setvkeyVerifier} setvkeyProof={setvkeyProof}></ButtonInitializeVerifier>
-      <ButtonGenerateProof
-        vkeyVerifier={vkeyVerifier}
-        vkeyProof={vkeyProof}
-        setcompiledCircuit={setcompiledCircuit}
-        hash={hash} signature={signature}
-        publicKey={publicKey} setproof={setproof}></ButtonGenerateProof>
+      <div className='flex flex-col items-center'>
+        <InputHash sethash={sethash}></InputHash>
+        <InputSignature setsignature={setsignature}></InputSignature>
+        <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
+      </div>
+      <div className='flex flex-col items-center'>
+        <ButtonInitializeVerifier setvkeyVerifier={setvkeyVerifier} setvkeyProof={setvkeyProof}></ButtonInitializeVerifier>
+        <ButtonGenerateProof
+          vkeyVerifier={vkeyVerifier}
+          vkeyProof={vkeyProof}
+          setcompiledCircuit={setcompiledCircuit}
+          hash={hash} signature={signature}
+          publicKey={publicKey} setproof={setproof}></ButtonGenerateProof>
+
+      </div>
     </div>
   );
 };

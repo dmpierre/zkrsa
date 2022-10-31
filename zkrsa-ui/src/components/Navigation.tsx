@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const NavMenu: NextComponentType = () => {
     return (
-        <div className='text-center'>
+
             <div className='flex justify-center'>
                 <Link href="/generate">
                     <a className="mr-5">Generate</a>
@@ -15,7 +15,6 @@ export const NavMenu: NextComponentType = () => {
                     <a className='ml-5'>Verify</a>
                 </Link>
             </div>
-        </div>
     );
 };
 

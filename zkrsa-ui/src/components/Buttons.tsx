@@ -28,7 +28,7 @@ const devPublicKey = process.env[ "NEXT_PUBLIC_MODULUS" ] as string | null;
 export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setproof, hash, signature, publicKey, vkeyProof, vkeyVerifier }) => {
 
   return (
-    <div className='ml-10 my-10'>
+    <div className="w-1/2 self-end">
       <button onClick={async () => {
         if (devHash) {
           // @dev handle dev environment here
@@ -71,15 +71,15 @@ interface ButtonInitializeVerifier {
 
 export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifier> = ({ setvkeyProof, setvkeyVerifier }) => {
   return (
-    <div className="ml-10 my-10">
-      <button className="border-black border-2" onClick={async () => {
+    <div className="w-1/2 self-end">
+      <button className=" border-black border-2" onClick={async () => {
         const vkeyProof = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_URL" ] as string);
         const vkeyVerifier = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_VERIFIER_URL" ] as string);
         setvkeyProof(vkeyProof.data);
         setvkeyVerifier(vkeyVerifier.data);
         console.log("Download complete");
       }}>
-        Intialize Verifier
+        Initialize Verifier
       </button>
     </div>
   );
