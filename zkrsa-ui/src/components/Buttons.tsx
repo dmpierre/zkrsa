@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from "react";
 import { splitToWords } from "../utils/crypto";
 //@ts-ignore
 import snarkjs from "snarkjs";
@@ -7,7 +7,7 @@ import { unstringifyBigInts } from "snarkjs/src/stringifybigint";
 //@ts-ignore
 import JSON_CIRCUIT from "../../../circom-rsa-verify/circuits/circuit.json";
 import axios from "axios";
-
+import BounceLoader from "react-spinners/BounceLoader";
 interface ButtonGenerateProof {
   setproof: Dispatch<SetStateAction<string | null>>;
   setcompiledCircuit: Dispatch<SetStateAction<null>>;
@@ -26,10 +26,10 @@ const devSignature = process.env[ "NEXT_PUBLIC_SIGNATURE" ] as string | null;
 const devPublicKey = process.env[ "NEXT_PUBLIC_MODULUS" ] as string | null;
 
 export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setproof, hash, signature, publicKey, vkeyProof, vkeyVerifier }) => {
-
+  const buttonDisabled = vkeyProof ? false : true;
   return (
-    <div className="w-1/2 self-end">
-      <button onClick={async () => {
+    <div className="w-1/2 my-2 self-end">
+      <button disabled={buttonDisabled} onClick={async () => {
         if (devHash) {
           // @dev handle dev environment here
           hash = devHash;
@@ -69,18 +69,26 @@ interface ButtonInitializeVerifier {
   setvkeyVerifier: Dispatch<SetStateAction<any | null>>;
 }
 
+
 export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifier> = ({ setvkeyProof, setvkeyVerifier }) => {
+  const [ disabled, setdisabled ] = useState(false);
+  const [ loading, setloading ] = useState(false);
+
   return (
-    <div className="w-1/2 self-end">
-      <button className=" border-black border-2" onClick={async () => {
+    <div className="flex w-1/2 self-end my-4">
+      <button className="border-black border-2" onClick={async () => {
+        setloading(true);
         const vkeyProof = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_URL" ] as string);
         const vkeyVerifier = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_VERIFIER_URL" ] as string);
         setvkeyProof(vkeyProof.data);
         setvkeyVerifier(vkeyVerifier.data);
-        console.log("Download complete");
+        setloading(false);
       }}>
         Initialize Verifier
       </button>
+      <div className="ml-4 self-center">
+        {loading ? <BounceLoader size={20}></BounceLoader> : null}
+      </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ interface StatusVKey {
 export const StatusVKey: FunctionComponent<StatusVKey> = ({ vkey }) => {
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center my-4'>
       {vkey ? "Ready to generate proof" : "Verifier not initialized yet."}
     </div>
   );
@@ -31,10 +31,12 @@ const Home: NextPage = () => {
       <StatusVKey vkey={vkeyProof}></StatusVKey>
       <div className='flex flex-col items-center'>
         <InputHash sethash={sethash}></InputHash>
-        <InputSignature setsignature={setsignature}></InputSignature>
+        <div className='my-4'>
+          <InputSignature setsignature={setsignature}></InputSignature>
+        </div>
         <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
       </div>
-      <div className='flex flex-col items-center'>
+      <div className='my-4 flex flex-col items-center'>
         <ButtonInitializeVerifier setvkeyVerifier={setvkeyVerifier} setvkeyProof={setvkeyProof}></ButtonInitializeVerifier>
         <ButtonGenerateProof
           vkeyVerifier={vkeyVerifier}
