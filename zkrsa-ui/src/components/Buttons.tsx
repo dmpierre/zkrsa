@@ -59,7 +59,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
           console.log(`Proof validity: ${validity}`);
         }
       }
-      } className='border-black border-2'>Calculate witness</button>
+      } className='border-black border-2'>Generate proof</button>
     </div>
   );
 };
@@ -75,8 +75,8 @@ export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifie
   const [ loading, setloading ] = useState(false);
 
   return (
-    <div className="flex w-1/2 self-end my-4">
-      <button className="border-black border-2" onClick={async () => {
+    <div className="flex">
+      <button className="self-center" onClick={async () => {
         setloading(true);
         const vkeyProof = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_URL" ] as string);
         const vkeyVerifier = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_VERIFIER_URL" ] as string);
@@ -84,9 +84,9 @@ export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifie
         setvkeyVerifier(vkeyVerifier.data);
         setloading(false);
       }}>
-        Initialize Verifier
+        Initialize
       </button>
-      <div className="ml-4 self-center">
+      <div className="self-center ml-4">
         {loading ? <BounceLoader size={20}></BounceLoader> : null}
       </div>
     </div>
