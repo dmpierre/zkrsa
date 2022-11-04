@@ -6,6 +6,9 @@ The `circom-rsa-verify` folder contains all necessary circuits and tests for car
 
 The `zkrsa-ui` contains the UI for generating or verifying proofs of valid RSA signatures using circom.
 
+### Todo
+- Use IndexedDB for offline vk storage and access?
+- Network status info ? Informing user whether vkey downloaded from remote or used locally
 
 ### Notes
 

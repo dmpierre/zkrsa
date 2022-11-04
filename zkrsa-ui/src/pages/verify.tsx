@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { StatusVKey } from ".";
-import { AppPageProps } from "../..";
+import { AppPageProps } from "..";
 import { ButtonInitializeVerifier } from "../components/Buttons";
 import { Title, NavMenu } from "../components/Navigation";
 

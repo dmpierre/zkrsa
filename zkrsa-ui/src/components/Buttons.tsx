@@ -8,15 +8,6 @@ import { unstringifyBigInts } from "snarkjs/src/stringifybigint";
 import JSON_CIRCUIT from "../../../circom-rsa-verify/circuits/circuit.json";
 import axios from "axios";
 import BounceLoader from "react-spinners/BounceLoader";
-interface ButtonGenerateProof {
-  setproof: Dispatch<SetStateAction<string | null>>;
-  setcompiledCircuit: Dispatch<SetStateAction<null>>;
-  hash: string | null;
-  signature: string | null;
-  publicKey: string | null;
-  vkeyProof: null | any;
-  vkeyVerifier: null | any;
-}
 
 const circuit = new snarkjs.Circuit(JSON_CIRCUIT);
 
@@ -64,10 +55,6 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
   );
 };
 
-interface ButtonInitializeVerifier {
-  setvkeyProof: Dispatch<SetStateAction<any | null>>;
-  setvkeyVerifier: Dispatch<SetStateAction<any | null>>;
-}
 
 
 export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifier> = ({ setvkeyProof, setvkeyVerifier }) => {

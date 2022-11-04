@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { createContext, Dispatch, FunctionComponent, useState } from 'react';
-import { AppPageProps } from '../..';
 import { ButtonInitializeVerifier, ButtonGenerateProof } from '../components/Buttons';
 import { InputHash, InputPublicKey, InputSignature, InputText } from '../components/Inputs';
 import { NavMenu, Title } from '../components/Navigation';
@@ -25,7 +24,7 @@ const Home: NextPage<AppPageProps> = ({ vkeyVerifier, setvkeyVerifier, vkeyProof
   const [ publicKey, setpublicKey ] = useState<null | string>(null);
   const [ proof, setproof ] = useState<null | string>(null);
   const [ compiledCircuit, setcompiledCircuit ] = useState(null);
-  
+
   return (
     <div>
       <Title></Title>
