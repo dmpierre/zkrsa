@@ -31,7 +31,6 @@ export const sign = async (RSAKeyPair: CryptoKeyPair, message: string, textEncod
 
 //@ts-ignore
 export function splitToWords (x, w, n, name) {
-    console.log(name);
     let t = bigInt(x);
     w = bigInt(w);
     n = bigInt(n);
