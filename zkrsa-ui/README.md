@@ -7,5 +7,8 @@ It allows you to verify in your browser RSA signatures and generate a zk proof r
 TODO: 
 
 - provide typings to `splitToWords` function in `utils`
+- Offload witness computation to web worker
+- provide typings to `proof`
 
 [Trusted setup and proof generation](https://github.com/iden3/snarkjs/issues/9)
+
