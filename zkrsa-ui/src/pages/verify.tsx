@@ -1,10 +1,9 @@
-import { NextPage } from "next";
-import { StatusVKey } from ".";
+import type { NextPage } from "next";
+import { StatusVKey } from "../components/Status";
 import { ButtonInitializeVerifier } from "../components/Buttons";
 import { Title, NavMenu } from "../components/Navigation";
 
-const Verify: NextPage<AppPageProps> = ({ vkeyState, setvkeyState, vkeyVerifier, setvkeyVerifier, vkeyProof, setvkeyProof}) => {
-    console.log(vkeyVerifier);
+const Verify: NextPage<AppPageProps> = ({ vkeyState, setvkeyState, vkeyVerifier, setvkeyVerifier, vkeyProof, setvkeyProof }) => {
     return (
         <div>
             <Title></Title>
@@ -13,7 +12,6 @@ const Verify: NextPage<AppPageProps> = ({ vkeyState, setvkeyState, vkeyVerifier,
                 <StatusVKey vkeyState={vkeyState} vkey={vkeyProof}></StatusVKey>
                 <ButtonInitializeVerifier setvkeyState={setvkeyState} setvkeyVerifier={setvkeyVerifier} setvkeyProof={setvkeyProof}></ButtonInitializeVerifier>
             </div>
-
         </div>
     );
 };

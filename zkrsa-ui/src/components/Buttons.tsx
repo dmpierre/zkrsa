@@ -39,7 +39,7 @@ const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
 };
 
 export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof, vkeyVerifier }) => {
-  const buttonDisabled = (vkeyProof && hash && signature && publicKey) ? false : false;
+  const buttonDisabled = (vkeyProof && hash && signature && publicKey) ? false : true;
   const [ loading, setloading ] = useState(false);
   const workerRef = useRef<Worker>();
   const [ currentStep, setcurrentStep ] = useState("");
@@ -56,7 +56,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
     return () => {
       workerRef.current?.terminate();
     };
-  }, []);
+  }, [ setproof, setpublicSignals ]);
 
 
   return (

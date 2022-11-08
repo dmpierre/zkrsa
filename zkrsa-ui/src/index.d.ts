@@ -1,3 +1,8 @@
+interface StatusVKey {
+  vkey: any | null;
+  vkeyState: string;
+}
+
 
 interface ButtonInitializeVerifier {
   setvkeyState: Dispatch<string>;

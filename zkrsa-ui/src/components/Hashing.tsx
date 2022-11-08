@@ -23,7 +23,7 @@ const HashText: FunctionComponent<HashText> = ({ text, hashValue, sethashValue }
                 sethashValue(null);
             }
         })();
-    }, [ text ]);
+    }, [ text, sethashValue ]);
 
     return (
         <>

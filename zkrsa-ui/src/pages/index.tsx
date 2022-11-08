@@ -3,20 +3,8 @@ import { createContext, Dispatch, FunctionComponent, useState } from 'react';
 import { ButtonInitializeVerifier, ButtonGenerateProof, ButtonExportProof } from '../components/Buttons';
 import { InputHash, InputPublicKey, InputSignature, InputText } from '../components/Inputs';
 import { NavMenu, Title } from '../components/Navigation';
+import { StatusVKey } from '../components/Status';
 
-
-interface StatusVKey {
-  vkey: any | null;
-  vkeyState: string;
-}
-export const StatusVKey: FunctionComponent<StatusVKey> = ({ vkey, vkeyState }) => {
-
-  return (
-    <div className='mr-5 self-center text-beige font-roboto-light-300'>
-      {vkeyState}
-    </div>
-  );
-};
 
 (BigInt.prototype as any).toJSON = function () {
   return this.toString();

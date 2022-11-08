@@ -1,4 +1,4 @@
-import { NextComponentType } from "next";
+import { NextComponentType, NextPage } from "next";
 import { Title, NavMenu } from "../components/Navigation";
 import { HashMessage } from "../components/Hashing";
 import { GenerateKeyPair, KeyPairDisplay } from "../components/GenerateKeyPair";
@@ -23,7 +23,7 @@ export const SignedMessage: FunctionComponent<SignedMessage> = ({ keypair, messa
                 setSignedMessage(signedMessage);
             }
         })();
-    }, [ keypair, message ]);
+    }, [ keypair, message, setSignedMessage ]);
     const displayText = signedMessage ? bigInt(ab2str(signedMessage, "hex"), 16).toString() : "";
     return (
         <>
@@ -36,7 +36,7 @@ export const SignedMessage: FunctionComponent<SignedMessage> = ({ keypair, messa
  * Generate a new RSA key pair and sign a message with it.
  * @returns 
  */
-const Generate: NextComponentType = () => {
+const Generate: NextPage = () => {
     const [ userText, setuserText ] = useState<string | null>(null);
     const [ hashValue, sethashValue ] = useState<string | null>(null);
     const [ keyPair, setkeyPair ] = useState<null | CryptoKeyPair>(null);
