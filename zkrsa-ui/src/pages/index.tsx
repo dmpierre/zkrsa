@@ -11,7 +11,7 @@ interface StatusVKey {
 export const StatusVKey: FunctionComponent<StatusVKey> = ({ vkey }) => {
 
   return (
-    <div className='mr-5'>
+    <div className='mr-5 text-beige font-roboto-light-300'>
       {vkey ? "Ready to generate proof" : "Verifier not initialized yet."}
     </div>
   );

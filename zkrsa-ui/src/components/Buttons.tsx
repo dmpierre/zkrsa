@@ -55,7 +55,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
           <CircularProgress disableShrink color="primary" />
         </div>
         :
-        <div className="self-center">
+        <div className="self-center font-roboto-light-300">
           <button disabled={buttonDisabled} onClick={async () => {
             setloading(true);
             if (devHash) {
@@ -81,7 +81,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
               const proof = {};
             }
           }
-          } className='border-black border-2'>Generate proof</  button>
+          } className='border-black font-work-sans text-beige border-2'>Generate proof</  button>
         </div>
       }
     </div>
@@ -93,7 +93,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
 export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifier> = ({ setvkeyProof, setvkeyVerifier }) => {
   const [ disabled, setdisabled ] = useState(false);
   const [ loading, setloading ] = useState(false);
-  const [ buttonText, setbuttonText ] = useState("Initialized");
+  const [ buttonText, setbuttonText ] = useState("Initialize");
   return (
 
     <div className="flex">
@@ -102,7 +102,7 @@ export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifie
           <BounceLoader size={20}></BounceLoader>
         </div>
         :
-        <button className="self-center" onClick={async () => {
+        <button className="self-center text-beige font-work-sans" onClick={async () => {
           setloading(true);
           const vkeyProof = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_URL" ] as string);
           const vkeyVerifier = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_VERIFIER_URL" ] as string);
