@@ -8,8 +8,8 @@ module.exports = {
     extend: {
       colors: {
         beige: "#E9E1DA",
-        blueGrey: "#556976"
-
+        blueGrey: "#556976",
+        gold: "#EFAD5F"
       },
       fontFamily: {
         'work-sans': ['Work Sans', 'sans-serif'],
