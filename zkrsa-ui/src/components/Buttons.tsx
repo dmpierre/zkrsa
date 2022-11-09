@@ -6,12 +6,11 @@ import snarkjs from "snarkjs";
 import { unstringifyBigInts } from "snarkjs/src/stringifybigint";
 
 //@ts-ignore
-import JSON_CIRCUIT from "../../../circom-rsa-verify/circuits/circuit.json";
+// import JSON_CIRCUIT from "../../../circom-rsa-verify/circuits/circuit.json";
 import axios from "axios";
-import BounceLoader from "react-spinners/BounceLoader";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const circuit = new snarkjs.Circuit(JSON_CIRCUIT);
+// const circuit = new snarkjs.Circuit(JSON_CIRCUIT);
 
 const exp = "65537";
 const devHash = process.env[ "NEXT_PUBLIC_HASH" ] as string | null;
@@ -83,7 +82,11 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
               signature = devSignature;
               publicKey = devPublicKey;
             }
-            setcurrentStep("Computing witness...");
+            setcurrentStep("Downloading circuit...");
+            const data = await (await axios.get(process.env[ "NEXT_PUBLIC_CIRCUIT_URL" ] as any)).data;
+            console.log(data)
+            const circuit = new snarkjs.Circuit(data);
+            setcurrentStep("Computing witness circuit...");
             const input = Object.assign({},
               splitToWords(signature, 64, 32, "sign"),
               splitToWords(exp, 64, 32, "exp"),
