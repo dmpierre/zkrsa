@@ -97,7 +97,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
               workerRef.current!.postMessage({ vkeyProof, witness });
             }
           }
-          } className='font-work-sans disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2'>Generate proof</  button>
+          } className='font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2'>Generate proof</  button>
         </div>
       }
     </div>
@@ -114,7 +114,7 @@ export const ButtonExportProof: FunctionComponent<ButtonExportProof> = ({ proof,
     <div className="flex w-1/3 self-end">
       {
         proof ?
-          <button className="disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2">
+          <button className="shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2">
             <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ proof, publicSignals }))}`} download="proof_public_signals.json">
               {`Download`}
             </a>
@@ -139,7 +139,7 @@ export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifie
           </ThemeProvider>
         </div>
         :
-        <button disabled={disabled} className="self-center disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2" onClick={async () => {
+        <button disabled={disabled} className="self-center shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2" onClick={async () => {
           setloading(true);
           setvkeyState("Downloading verifier...");
           const vkeyProof = await axios.get(process.env[ "NEXT_PUBLIC_VKEY_URL" ] as string);

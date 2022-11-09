@@ -1,5 +1,7 @@
 import { NextComponentType } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import github from "../../public/github.png";
 
 export const NavMenu: NextComponentType = () => {
     return (
@@ -27,3 +29,30 @@ export const Title: NextComponentType = () => {
     );
 };
 
+
+export const Footer: NextComponentType = () => {
+    return (
+      <div className='flex justify-center mt-5'>
+        <div className='w-1/4 text-center self-center'>
+          <a target={'_blank'} href="https://github.com/dmpierre/zkrsa">
+            <Image src={github} width={30} height={30}></Image>
+          </a>
+        </div>
+        <div className='w-1/4 text-center font-work-sans text-beige'>
+          <a target={"_blank"} href="https://appliedzkp.org/">A PSE funded project</a>
+        </div>
+      </div>
+    );
+  };
+  
+  
+  export const Description: NextComponentType = () => {
+    return (
+      <div className='flex font-roboto-light-300 my-10 text-beige justify-center'>
+        <div className='w-3/4 text-center'>
+          Generate a zero-knowledge proof for a valid RSA signature.
+        </div>
+      </div>
+    );
+  };
+  
