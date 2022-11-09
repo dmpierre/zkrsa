@@ -34,12 +34,12 @@ export const Footer: NextComponentType = () => {
     return (
       <div className='flex justify-center mt-5'>
         <div className='w-1/4 text-center self-center'>
-          <a target={'_blank'} href="https://github.com/dmpierre/zkrsa">
-            <Image src={github} width={30} height={30}></Image>
+          <a target={'_blank'} rel={"noreferrer"} href="https://github.com/dmpierre/zkrsa">
+            <Image alt="github-logo" src={github} width={30} height={30}></Image>
           </a>
         </div>
         <div className='w-1/4 text-center font-work-sans text-beige'>
-          <a target={"_blank"} href="https://appliedzkp.org/">A PSE funded project</a>
+          <a target={"_blank"} rel={"noreferrer"} href="https://appliedzkp.org/">A PSE funded project</a>
         </div>
       </div>
     );
