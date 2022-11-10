@@ -1,10 +1,10 @@
-import type { NextComponentType, NextPage } from "next";
+import type { NextPage } from "next";
 import { StatusVKey } from "../components/Status";
 import { ButtonInitializeVerifier, theme } from "../components/Buttons";
 import { Title, NavMenu, Description, Footer } from "../components/Navigation";
-import { ChangeEvent, Dispatch, FunctionComponent, useState } from "react";
+import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 //@ts-ignore
 import snarkjs from "snarkjs";
@@ -23,7 +23,7 @@ const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
 
 const Verify: NextPage<AppPageProps> = ({ proof, setproof, vkeyState, setvkeyState, vkeyVerifier, setvkeyVerifier, vkeyProof, setvkeyProof }) => {
     const [ uploadedProof, setuploadedProof ] = useState<any | null>(null);
-    const [ proofValidity, setproofValidity ] = useState<boolean | null>(true);
+    const [ proofValidity, setproofValidity ] = useState<boolean | null>(null);
     const [ verifying, setverifying ] = useState(false);
 
     return (
