@@ -12,11 +12,10 @@ import { StatusVKey } from '../components/Status';
   return this.toString();
 };
 
-const Home: NextPage<AppPageProps> = ({ vkeyState, setvkeyState, vkeyVerifier, setvkeyVerifier, vkeyProof, setvkeyProof }) => {
+const Home: NextPage<AppPageProps> = ({ proof, setproof, vkeyState, setvkeyState, vkeyVerifier, setvkeyVerifier, vkeyProof, setvkeyProof }) => {
   const [ hash, sethash ] = useState<null | string>(null);
   const [ signature, setsignature ] = useState<null | string>(null);
   const [ publicKey, setpublicKey ] = useState<null | string>(null);
-  const [ proof, setproof ] = useState<null | string>(null);
   const [ publicSignals, setpublicSignals ] = useState<null | any>(null);
   const [ compiledCircuit, setcompiledCircuit ] = useState(null);
 

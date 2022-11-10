@@ -6,11 +6,9 @@ import snarkjs from "snarkjs";
 import { unstringifyBigInts } from "snarkjs/src/stringifybigint";
 
 //@ts-ignore
-// import JSON_CIRCUIT from "../../../circom-rsa-verify/circuits/circuit.json";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-
-// const circuit = new snarkjs.Circuit(JSON_CIRCUIT);
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const exp = "65537";
 const devHash = process.env[ "NEXT_PUBLIC_HASH" ] as string | null;
@@ -18,9 +16,8 @@ const devSignature = process.env[ "NEXT_PUBLIC_SIGNATURE" ] as string | null;
 const devPublicKey = process.env[ "NEXT_PUBLIC_MODULUS" ] as string | null;
 const devGenerateProof = Boolean(Number(process.env[ "NEXT_PUBLIC_GENERATE_PROOF" ]));
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: '#EFAD5F',
@@ -28,14 +25,6 @@ const theme = createTheme({
   }
 });
 
-
-const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
-  snarkjs.original.isValid(
-    unstringifyBigInts(vkeyVerifier),
-    unstringifyBigInts(proof),
-    unstringifyBigInts(publicSignals)
-  );
-};
 
 export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof, vkeyVerifier }) => {
   const buttonDisabled = (vkeyProof && hash && signature && publicKey) ? false : true;

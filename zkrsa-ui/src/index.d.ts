@@ -22,10 +22,16 @@ interface ButtonGenerateProof {
 }
 
 interface AppPageProps {
+  proof: any;
+  setproof: Dispatch<any>
   vkeyState: string;
   setvkeyState: Dispatch<string>;
   vkeyVerifier: null | any;
   setvkeyVerifier: Dispatch<any>;
   vkeyProof: null | any;
   setvkeyProof: Dispatch<any>;
+}
+
+interface InputProof {
+  setuploadedProof: Dispatch<any>;
 }

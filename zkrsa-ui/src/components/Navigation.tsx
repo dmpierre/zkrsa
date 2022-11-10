@@ -32,7 +32,7 @@ export const Title: NextComponentType = () => {
 
 export const Footer: NextComponentType = () => {
     return (
-      <div className='flex justify-center mt-5'>
+      <div className='flex justify-center mt-5 mb-5'>
         <div className='w-1/4 text-center self-center'>
           <a target={'_blank'} rel={"noreferrer"} href="https://github.com/dmpierre/zkrsa">
             <Image alt="github-logo" src={github} width={30} height={30}></Image>
