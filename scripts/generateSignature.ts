@@ -18,7 +18,8 @@ async function main() {
     ["sign", "verify"]
   );
 
-  const k = await crypto.webcrypto.subtle.exportKey("jwk", publicKey);
+  const pub = await crypto.webcrypto.subtle.exportKey("jwk", publicKey);
+
   const signature = await crypto.webcrypto.subtle.sign(
     "RSASSA-PKCS1-v1_5",
     privateKey,
@@ -29,17 +30,20 @@ async function main() {
     ec.encode(message)
   );
 
-  const kBinary = bigInt(
-    Buffer.from(k.n!, "base64").toString("hex"),
+  const pubKey = bigInt(
+    Buffer.from(pub.n!, "base64").toString("hex"),
     16
   ).toString();
+
   const digestDecimal = bigInt(ab2str(digest, "hex"), 16).toString();
   const signatureDecimal = bigInt(ab2str(signature, "hex"), 16).toString();
+
   console.log({
     digestDecimal,
     signatureDecimal,
-    kBinary,
+    pubKey,
   });
+  return;
 }
 
-main().then(() => exit(1));
+main().then(() => exit(0));
