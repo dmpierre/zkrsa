@@ -12,8 +12,6 @@ const exp = "65537";
 const devHash = process.env[ "NEXT_PUBLIC_HASH" ] as string | null;
 const devSignature = process.env[ "NEXT_PUBLIC_SIGNATURE" ] as string | null;
 const devPublicKey = process.env[ "NEXT_PUBLIC_MODULUS" ] as string | null;
-const devGenerateProof = Boolean(Number(process.env[ "NEXT_PUBLIC_GENERATE_PROOF" ]));
-
 
 export const theme = createTheme({
   palette: {
@@ -71,7 +69,6 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
             }
             setcurrentStep("Downloading circuit...");
             const data = await (await axios.get(process.env[ "NEXT_PUBLIC_CIRCUIT_URL" ] as any)).data;
-            console.log(data);
             const circuit = new snarkjs.Circuit(data);
             setcurrentStep("Computing witness circuit...");
             const input = Object.assign({},
@@ -82,10 +79,8 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
             );
             const witness = circuit.calculateWitness(input);
             setcurrentStep("Generating proof...");
-            if (devGenerateProof) {
-              console.log("Generating proof");
-              workerRef.current!.postMessage({ vkeyProof, witness });
-            }
+            console.log("Generating proof");
+            workerRef.current!.postMessage({ vkeyProof, witness });
           }
           } className='font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2'>Generate proof</  button>
         </div>

@@ -19,6 +19,7 @@ const Home: NextPage<AppPageProps> = ({ proof, setproof, vkeyState, setvkeyState
   const [ publicSignals, setpublicSignals ] = useState<null | any>(null);
   const [ compiledCircuit, setcompiledCircuit ] = useState(null);
 
+  console.log(process.env[ "NEXT_PUBLIC_VERCEL_ENV" ]);
   return (
     <div>
       <Title></Title>
