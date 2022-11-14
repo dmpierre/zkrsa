@@ -2,10 +2,6 @@ import { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useState } fr
 
 export const textEncoder = new TextEncoder();
 
-interface TextInputProps {
-    setuserText: Dispatch<SetStateAction<string | null>>;
-}
-
 export const InputText: FunctionComponent<TextInputProps> = ({ setuserText }) => {
 
     return (
@@ -16,9 +12,6 @@ export const InputText: FunctionComponent<TextInputProps> = ({ setuserText }) =>
     );
 };
 
-interface InputHash {
-    sethash: Dispatch<SetStateAction<string | null>>;
-}
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
@@ -29,9 +22,6 @@ export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     );
 };
 
-interface InputSignature {
-    setsignature: Dispatch<SetStateAction<string | null>>;
-}
 
 export const InputSignature: FunctionComponent<InputSignature> = ({ setsignature }) => {
     return (
@@ -42,9 +32,6 @@ export const InputSignature: FunctionComponent<InputSignature> = ({ setsignature
     );
 };
 
-interface InputPublicKey {
-    setpublicKey: Dispatch<SetStateAction<string | null>>;
-}
 
 export const InputPublicKey: FunctionComponent<InputPublicKey> = ({ setpublicKey }) => {
     return (

@@ -1,15 +1,10 @@
 import bigInt from "big-integer";
-import { Dispatch, SetStateAction, FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { hash } from "../utils/crypto";
 import { InputText } from "./Inputs";
 //@ts-ignore
 import * as ab2str from "arraybuffer-to-string";
 
-interface HashText {
-    text: string | null;
-    hashValue: string | null;
-    sethashValue: Dispatch<SetStateAction<string | null>>;
-};
 
 const HashText: FunctionComponent<HashText> = ({ text, hashValue, sethashValue }) => {
     useEffect(() => {
@@ -33,12 +28,6 @@ const HashText: FunctionComponent<HashText> = ({ text, hashValue, sethashValue }
     );
 };
 
-interface HashMessage {
-    sethashValue: Dispatch<SetStateAction<string | null>>,
-    setuserText: Dispatch<SetStateAction<string | null>>,
-    userText: string | null,
-    hashValue: string | null
-}
 
 export const HashMessage: FunctionComponent<HashMessage> = ({ sethashValue, setuserText, userText, hashValue }) => {
 

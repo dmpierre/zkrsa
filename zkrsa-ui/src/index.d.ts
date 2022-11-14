@@ -35,3 +35,32 @@ interface AppPageProps {
 interface InputProof {
   setuploadedProof: Dispatch<any>;
 }
+
+interface HashMessage {
+  sethashValue: Dispatch<SetStateAction<string | null>>,
+  setuserText: Dispatch<SetStateAction<string | null>>,
+  userText: string | null,
+  hashValue: string | null
+}
+
+interface HashText {
+  text: string | null;
+  hashValue: string | null;
+  sethashValue: Dispatch<SetStateAction<string | null>>;
+};
+
+interface TextInputProps {
+  setuserText: Dispatch<SetStateAction<string | null>>;
+}
+
+interface InputHash {
+  sethash: Dispatch<SetStateAction<string | null>>;
+}
+
+interface InputSignature {
+  setsignature: Dispatch<SetStateAction<string | null>>;
+}
+
+interface InputPublicKey {
+  setpublicKey: Dispatch<SetStateAction<string | null>>;
+}
