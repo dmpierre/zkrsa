@@ -1,0 +1,14 @@
+{
+  "name": "zkrsa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dmpierre/zkrsa.git",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "arraybuffer-to-string": "^1.0.2",
+    "big-integer": "^1.6.51",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
