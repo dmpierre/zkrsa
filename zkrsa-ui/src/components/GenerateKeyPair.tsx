@@ -16,7 +16,7 @@ export const KeyPairDisplay: FunctionComponent<KeyPairDisplay> = ({ keypair }) =
     const hexPubKey = keypair ? bigInt(Buffer.from(keypair.n!, "base64").toString("hex"), 16).toString() : null;
     return (
         <>
-        <div>{hexPubKey}</div>
+            <div>{hexPubKey}</div>
         </>
     );
 };

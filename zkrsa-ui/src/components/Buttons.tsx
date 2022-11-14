@@ -2,8 +2,6 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { splitToWords } from "../utils/crypto";
 //@ts-ignore
 import snarkjs from "snarkjs";
-//@ts-ignore
-import { unstringifyBigInts } from "snarkjs/src/stringifybigint";
 
 //@ts-ignore
 import axios from "axios";
@@ -26,7 +24,7 @@ export const theme = createTheme({
 });
 
 
-export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof, vkeyVerifier }) => {
+export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof }) => {
   const buttonDisabled = (vkeyProof && hash && signature && publicKey) ? false : true;
   const [ loading, setloading ] = useState(false);
   const workerRef = useRef<Worker>();
@@ -73,7 +71,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
             }
             setcurrentStep("Downloading circuit...");
             const data = await (await axios.get(process.env[ "NEXT_PUBLIC_CIRCUIT_URL" ] as any)).data;
-            console.log(data)
+            console.log(data);
             const circuit = new snarkjs.Circuit(data);
             setcurrentStep("Computing witness circuit...");
             const input = Object.assign({},
@@ -103,18 +101,20 @@ interface ButtonExportProof {
 
 export const ButtonExportProof: FunctionComponent<ButtonExportProof> = ({ proof, publicSignals }) => {
   return (
-    <div className="flex w-1/3 self-end">
+    <>
       {
         proof ?
-          <button className="shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2">
-            <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ proof, publicSignals }))}`} download="proof_public_signals.json">
-              {`Download`}
-            </a>
-          </button>
+          <div className="flex w-1/3 self-end">
+            <button className="shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige font-work-sans border-2 rounded-lg border-beige hover:border-gold px-3 py-2">
+              <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ proof, publicSignals }))}`} download="proof_public_signals.json">
+                Download
+              </a>
+            </button>
+          </div>
           :
-          <></>
+          null
       }
-    </div>
+    </>
   );
 };
 export const ButtonInitializeVerifier: FunctionComponent<ButtonInitializeVerifier> = ({ setvkeyState, setvkeyProof, setvkeyVerifier }) => {
