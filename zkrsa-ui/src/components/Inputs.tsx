@@ -25,7 +25,7 @@ export const InputText: FunctionComponent<TextInputProps> = ({
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
-        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300  text-beige">
                 Enter hash:{' '}
             </div>
@@ -42,7 +42,7 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
     setsignature,
 }) => {
     return (
-        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter signature:{' '}
             </div>
@@ -61,7 +61,7 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     setpublicKey,
 }) => {
     return (
-        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter public key:{' '}
             </div>
@@ -95,12 +95,12 @@ export const InputProof: FunctionComponent<InputProof> = ({
     }
 
     return (
-        <div className="border-gold border-4 p-4 pt-7 pb-7 rounded-2xl shadow-xl">
-            <div className="font-roboto-light-300 text-beige mb-3">
+        <div className="border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
+            <div className="pl-4 font-roboto-light-300 text-beige mb-3">
                 Upload proof:{' '}
             </div>
             <input
-                className="font-work-sans text-beige pl-2 pr-20 focus:outline-none bg-inherit"
+                className="font-work-sans pl-4 text-beige focus:outline-none bg-inherit"
                 type="file"
                 onChange={handleChange}
             />

@@ -49,7 +49,7 @@ const Home: NextPage<AppPageProps> = ({
                 <InputSignature setsignature={setsignature}></InputSignature>
                 <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
             </div>
-            <div className="mt-4 flex flex-col items-center">
+            <div className="mt-4 flex flex-col w-11/12">
                 <ButtonGenerateProof
                     vkeyVerifier={vkeyVerifier}
                     vkeyProof={vkeyProof}
@@ -60,15 +60,13 @@ const Home: NextPage<AppPageProps> = ({
                     publicKey={publicKey}
                     setproof={setproof}
                 ></ButtonGenerateProof>
-            </div>
-            {proof ? (
-                <div className="mt-4 flex flex-col items-center">
+                {proof ? (
                     <ButtonExportProof
                         publicSignals={publicSignals}
                         proof={proof}
                     ></ButtonExportProof>
-                </div>
-            ) : null}
+                ) : null}
+            </div>
             <Footer></Footer>
         </div>
     )

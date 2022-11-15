@@ -5,9 +5,9 @@ import github from '../../public/github.png'
 
 export const NavMenu: NextComponentType = () => {
     return (
-        <div className="flex my-6 space-x-20 flex-col text-center items-center md:flex-row md:justify-center">
+        <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-0 sm:space-x-20 sm:flex-row sm:justify-center">
             <Link href="/">
-                <a className="hover:text-gold text-beige text-xl font-bold my-2 md:my-0 md:ml-5 md:mr-5 font-roboto-light-300">
+                <a className="hover:text-gold text-beige text-xl font-bold font-roboto-light-300">
                     Prove
                 </a>
             </Link>
