@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { ButtonInitializeVerifier, ButtonGenerateProof, ButtonExportProof } from '../components/Buttons';
 import { InputHash, InputPublicKey, InputSignature, InputText } from '../components/Inputs';
 import { NavMenu, Title, Description, Footer } from '../components/Navigation';
@@ -19,7 +18,6 @@ const Home: NextPage<AppPageProps> = ({ proof, setproof, vkeyState, setvkeyState
   const [ publicSignals, setpublicSignals ] = useState<null | any>(null);
   const [ compiledCircuit, setcompiledCircuit ] = useState(null);
 
-  console.log(process.env[ "NEXT_PUBLIC_VERCEL_ENV" ]);
   return (
     <div>
       <Title></Title>

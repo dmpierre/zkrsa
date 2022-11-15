@@ -15,6 +15,21 @@ To generate keys from the CLI - note that your message does not need to be quote
 $ yarn sign this is a message to sign
 ```
 
+It will log a new signature, generated out of an RSA keypair. You can copy those values and use them directly within the zkRSA UI for generating a new proof. 
+
+### Generating and verifying proofs
+
+On the zkRSA UI, you can generate and verify proofs for valid RSA signatures. The verify tab, accepts a JSON with the following format: 
+
+```js
+{
+    "proof": proof,
+    "publicSignals": publicSignals
+}
+```
+
+This is the output format when downloading a proof from the "generate" tab. But you can also pre-format your own proof so as to verify it from the ui. 
+
 ### Notes
 
 - Grant proposal V2: https://hackmd.io/DoZPolTRRN-WNYheT7MauA

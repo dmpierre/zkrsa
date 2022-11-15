@@ -31,8 +31,6 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({ se
   useEffect(() => {
     workerRef.current = new Worker(new URL("../worker/generateProof.ts", import.meta.url));
     workerRef.current.onmessage = (e: MessageEvent<{ proof: any, publicSignals: any; }>) => {
-      console.log("Received message");
-      console.log(e.data.proof);
       setproof(e.data.proof);
       setpublicSignals(e.data.publicSignals);
       setloading(false);
