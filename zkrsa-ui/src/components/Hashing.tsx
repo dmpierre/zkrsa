@@ -1,41 +1,52 @@
-import bigInt from "big-integer";
-import { FunctionComponent, useEffect } from "react";
-import { hash } from "../utils/crypto";
-import { InputText } from "./Inputs";
+import bigInt from 'big-integer'
+import { FunctionComponent, useEffect } from 'react'
+import { hash } from '../utils/crypto'
+import { InputText } from './Inputs'
 //@ts-ignore
-import * as ab2str from "arraybuffer-to-string";
+import * as ab2str from 'arraybuffer-to-string'
 
-
-const HashText: FunctionComponent<HashText> = ({ text, hashValue, sethashValue }) => {
+const HashText: FunctionComponent<HashText> = ({
+    text,
+    hashValue,
+    sethashValue,
+}) => {
     useEffect(() => {
-        (async function () {
+        ;(async function () {
             if (text) {
-                const hashValue = await hash(text, new TextEncoder());
-                const digestDecimal = bigInt(ab2str(hashValue, "hex"), 16).toString();
-                sethashValue(digestDecimal);
+                const hashValue = await hash(text, new TextEncoder())
+                const digestDecimal = bigInt(
+                    ab2str(hashValue, 'hex'),
+                    16
+                ).toString()
+                sethashValue(digestDecimal)
+            } else {
+                sethashValue(null)
             }
-            else {
-                sethashValue(null);
-            }
-        })();
-    }, [ text, sethashValue ]);
+        })()
+    }, [text, sethashValue])
 
     return (
         <>
             <div className="ml-10">Message: {text}</div>
             <div className="ml-10">Hash: {hashValue}</div>
         </>
-    );
-};
+    )
+}
 
-
-export const HashMessage: FunctionComponent<HashMessage> = ({ sethashValue, setuserText, userText, hashValue }) => {
-
+export const HashMessage: FunctionComponent<HashMessage> = ({
+    sethashValue,
+    setuserText,
+    userText,
+    hashValue,
+}) => {
     return (
         <>
-            <InputText setuserText={setuserText} ></InputText >
-            <HashText text={userText} hashValue={hashValue} sethashValue={sethashValue}></HashText>
+            <InputText setuserText={setuserText}></InputText>
+            <HashText
+                text={userText}
+                hashValue={hashValue}
+                sethashValue={sethashValue}
+            ></HashText>
         </>
-    );
-};
-
+    )
+}

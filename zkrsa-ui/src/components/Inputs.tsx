@@ -1,67 +1,109 @@
-import { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import {
+    ChangeEvent,
+    Dispatch,
+    FunctionComponent,
+    SetStateAction,
+    useState,
+} from 'react'
 
-export const textEncoder = new TextEncoder();
+export const textEncoder = new TextEncoder()
 
-export const InputText: FunctionComponent<TextInputProps> = ({ setuserText }) => {
-
+export const InputText: FunctionComponent<TextInputProps> = ({
+    setuserText,
+}) => {
     return (
         <div className="ml-10 my-10 font-roboto-light-300 text-beige">
             <div>Enter text</div>
-            <input className="border-b-2 focus:outline-none" type="text" onChange={(e) => setuserText(e.target.value)} />
+            <input
+                className="border-b-2 focus:outline-none"
+                type="text"
+                onChange={(e) => setuserText(e.target.value)}
+            />
         </div>
-    );
-};
-
+    )
+}
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
         <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
-            <div className="font-roboto-light-300  text-beige">Enter hash: </div>
-            <input className='border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit' type="text" onChange={(e) => sethash(e.target.value)} />
+            <div className="font-roboto-light-300  text-beige">
+                Enter hash:{' '}
+            </div>
+            <input
+                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                type="text"
+                onChange={(e) => sethash(e.target.value)}
+            />
         </div>
-    );
-};
+    )
+}
 
-
-export const InputSignature: FunctionComponent<InputSignature> = ({ setsignature }) => {
+export const InputSignature: FunctionComponent<InputSignature> = ({
+    setsignature,
+}) => {
     return (
         <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
-            <div className="font-roboto-light-300 text-beige">Enter signature: </div>
-            <input className='border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit' type="text" name="" id="" onChange={(e) => setsignature(e.target.value)} />
+            <div className="font-roboto-light-300 text-beige">
+                Enter signature:{' '}
+            </div>
+            <input
+                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => setsignature(e.target.value)}
+            />
         </div>
-    );
-};
+    )
+}
 
-
-export const InputPublicKey: FunctionComponent<InputPublicKey> = ({ setpublicKey }) => {
+export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
+    setpublicKey,
+}) => {
     return (
         <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
-            <div className="font-roboto-light-300 text-beige">Enter public key: </div>
-            <input className='border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit' type="text" name="" id="" onChange={(e) => setpublicKey(e.target.value)} />
+            <div className="font-roboto-light-300 text-beige">
+                Enter public key:{' '}
+            </div>
+            <input
+                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => setpublicKey(e.target.value)}
+            />
         </div>
-    );
-};
+    )
+}
 
-export const InputProof: FunctionComponent<InputProof> = ({ setuploadedProof }) => {
+export const InputProof: FunctionComponent<InputProof> = ({
+    setuploadedProof,
+}) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const fileReader = new FileReader();
-            fileReader.readAsText(e.target.files[ 0 ], "UTF-8");
+            const fileReader = new FileReader()
+            fileReader.readAsText(e.target.files[0], 'UTF-8')
             fileReader.onload = (e) => {
                 if (e.target) {
-                    const proof = JSON.parse(e.target.result as string);
-                    console.log(proof);
-                    setuploadedProof(proof);
+                    const proof = JSON.parse(e.target.result as string)
+                    console.log(proof)
+                    setuploadedProof(proof)
                     // console.log(validity(vkeyVerifier, proof.proof, proof.publicSignals));
                 }
-            };
+            }
         }
-    };
+    }
 
     return (
         <div className="border-gold border-4 p-4 pt-7 pb-7 rounded-2xl shadow-xl">
-            <div className="font-roboto-light-300 text-beige mb-3">Upload proof: </div>
-            <input className='font-work-sans text-beige pl-2 pr-20 focus:outline-none bg-inherit' type="file" onChange={handleChange} />
+            <div className="font-roboto-light-300 text-beige mb-3">
+                Upload proof:{' '}
+            </div>
+            <input
+                className="font-work-sans text-beige pl-2 pr-20 focus:outline-none bg-inherit"
+                type="file"
+                onChange={handleChange}
+            />
         </div>
-    );
-};
+    )
+}
