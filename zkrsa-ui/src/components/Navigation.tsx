@@ -5,14 +5,14 @@ import github from '../../public/github.png'
 
 export const NavMenu: NextComponentType = () => {
     return (
-        <div className="flex my-6 flex-col text-center items-center md:flex-row md:justify-center">
+        <div className="flex my-6 space-x-20 flex-col text-center items-center md:flex-row md:justify-center">
             <Link href="/">
-                <a className="w-1/5 text-beige text-xl font-bold my-2 md:my-0 md:ml-5 md:mr-5 font-roboto-light-300">
+                <a className="hover:text-gold text-beige text-xl font-bold my-2 md:my-0 md:ml-5 md:mr-5 font-roboto-light-300">
                     Prove
                 </a>
             </Link>
             <Link href="/verify">
-                <a className="w-1/5 text-beige text-xl font-bold font-roboto-light-300">
+                <a className="hover:text-gold text-beige text-xl font-bold font-roboto-light-300">
                     Verify
                 </a>
             </Link>
@@ -32,7 +32,7 @@ export const Title: NextComponentType = () => {
 
 export const Footer: NextComponentType = () => {
     return (
-        <div className="flex justify-center mt-5 mb-5">
+        <div className="flex justify-center items-center mt-5 mb-5">
             <div className="w-1/4 text-center self-center">
                 <a
                     target={'_blank'}
@@ -49,11 +49,12 @@ export const Footer: NextComponentType = () => {
             </div>
             <div className="w-1/4 text-center font-work-sans text-beige">
                 <a
+                    className="hover:text-gold"
                     target={'_blank'}
                     rel={'noreferrer'}
                     href="https://appliedzkp.org/"
                 >
-                    A PSE funded project
+                    A P.S.E. project
                 </a>
             </div>
         </div>
@@ -66,7 +67,13 @@ export const Description: NextComponentType = () => {
             <div className="w-3/4 text-center">
                 Generate a zero-knowledge proof for a valid RSA signature. You
                 can generate a signature using our repo{' '}
-                <a href="https://github.com/dmpierre/zkrsa">here</a>.
+                <a
+                    className="hover:text-gold"
+                    href="https://github.com/dmpierre/zkrsa"
+                >
+                    here
+                </a>
+                .
             </div>
         </div>
     )

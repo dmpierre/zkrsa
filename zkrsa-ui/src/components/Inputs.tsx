@@ -25,12 +25,12 @@ export const InputText: FunctionComponent<TextInputProps> = ({
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
-        <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300  text-beige">
                 Enter hash:{' '}
             </div>
             <input
-                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                className="border-b-2 font-work-sans text-beige pl-2 w-full focus:outline-none bg-inherit"
                 type="text"
                 onChange={(e) => sethash(e.target.value)}
             />
@@ -42,12 +42,12 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
     setsignature,
 }) => {
     return (
-        <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter signature:{' '}
             </div>
             <input
-                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                className="border-b-2 font-work-sans text-beige pl-2 w-full focus:outline-none bg-inherit"
                 type="text"
                 name=""
                 id=""
@@ -61,12 +61,12 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     setpublicKey,
 }) => {
     return (
-        <div className="border-gold border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold w-1/3 border-4 p-10 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter public key:{' '}
             </div>
             <input
-                className="border-b-2 font-work-sans text-beige pl-2 pr-40 focus:outline-none bg-inherit"
+                className="border-b-2 w-full font-work-sans text-beige pl-2 focus:outline-none bg-inherit"
                 type="text"
                 name=""
                 id=""

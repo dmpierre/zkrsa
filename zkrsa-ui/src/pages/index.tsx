@@ -44,13 +44,9 @@ const Home: NextPage<AppPageProps> = ({
                     setvkeyProof={setvkeyProof}
                 ></ButtonInitializeVerifier>
             </div>
-            <div className="mt-5 flex flex-col items-center">
+            <div className="flex flex-col space-y-10 items-center">
                 <InputHash sethash={sethash}></InputHash>
-                <div className="my-10">
-                    <InputSignature
-                        setsignature={setsignature}
-                    ></InputSignature>
-                </div>
+                <InputSignature setsignature={setsignature}></InputSignature>
                 <InputPublicKey setpublicKey={setpublicKey}></InputPublicKey>
             </div>
             <div className="mt-4 flex flex-col items-center">
