@@ -2,13 +2,7 @@ import { NextPage } from 'next'
 import { Title, NavMenu } from '../components/Navigation'
 import { HashMessage } from '../components/Hashing'
 import { GenerateKeyPair, KeyPairDisplay } from '../components/GenerateKeyPair'
-import {
-    Dispatch,
-    FunctionComponent,
-    SetStateAction,
-    useEffect,
-    useState,
-} from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { sign } from '../utils/crypto'
 import bigInt from 'big-integer'
 //@ts-ignore
