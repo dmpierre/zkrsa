@@ -88,14 +88,13 @@ export const InputProof: FunctionComponent<InputProof> = ({
                     const proof = JSON.parse(e.target.result as string)
                     console.log(proof)
                     setuploadedProof(proof)
-                    // console.log(validity(vkeyVerifier, proof.proof, proof.publicSignals));
                 }
             }
         }
     }
 
     return (
-        <div className="border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
+        <div className="w-10/12 border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
             <div className="pl-4 font-roboto-light-300 text-beige mb-3">
                 Upload proof:{' '}
             </div>
