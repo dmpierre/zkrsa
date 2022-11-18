@@ -1,10 +1,12 @@
 import {
     ChangeEvent,
     Dispatch,
+    Fragment,
     FunctionComponent,
     SetStateAction,
     useState,
 } from 'react'
+import { splitToWords } from '../utils/crypto'
 
 export const textEncoder = new TextEncoder()
 
@@ -25,7 +27,7 @@ export const InputText: FunctionComponent<TextInputProps> = ({
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     return (
-        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300  text-beige">
                 Enter hash:{' '}
             </div>
@@ -38,11 +40,32 @@ export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     )
 }
 
+enum InputInvalidity {
+    MISSING = 'missing',
+    INVALID_CHARACTER = 'invalid character detected',
+}
+
 export const InputSignature: FunctionComponent<InputSignature> = ({
     setsignature,
 }) => {
+    const [invalidSignature, setinvalidSignature] = useState<string | null>(
+        null
+    )
+    const checkAndSetIfValid = (value: string) => {
+        if (value) {
+            try {
+                const _ignore = splitToWords(value, 64, 32, 'sign')
+                setsignature(value)
+                setinvalidSignature(null)
+            } catch (error) {
+                setinvalidSignature('Signature should be an integer.')
+            }
+        } else {
+            setinvalidSignature(null)
+        }
+    }
     return (
-        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter signature:{' '}
             </div>
@@ -51,8 +74,15 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
                 type="text"
                 name=""
                 id=""
-                onChange={(e) => setsignature(e.target.value)}
+                onChange={(e) => checkAndSetIfValid(e.target.value)}
             />
+            <div className="text-gold mt-2 text-sm">
+                {invalidSignature ? (
+                    invalidSignature
+                ) : (
+                    <Fragment>&nbsp;</Fragment>
+                )}
+            </div>
         </div>
     )
 }
@@ -61,7 +91,7 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     setpublicKey,
 }) => {
     return (
-        <div className="border-gold sm:w-1/3 border-4 p-10 rounded-2xl shadow-xl">
+        <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter public key:{' '}
             </div>
@@ -94,7 +124,7 @@ export const InputProof: FunctionComponent<InputProof> = ({
     }
 
     return (
-        <div className="w-10/12 border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
+        <div className="w-10/12 sm:w-1/3 border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
             <div className="pl-4 font-roboto-light-300 text-beige mb-3">
                 Upload proof:{' '}
             </div>

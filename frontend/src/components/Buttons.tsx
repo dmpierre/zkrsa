@@ -34,7 +34,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({
     const [loading, setloading] = useState(false)
     const workerRef = useRef<Worker>()
     const [currentStep, setcurrentStep] = useState('')
-
+    const [errorMessage, seterrorMessage] = useState<string | null>(null)
     useEffect(() => {
         workerRef.current = new Worker(
             new URL('../worker/generateProof.ts', import.meta.url)
@@ -69,46 +69,54 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({
                     </div>
                 </div>
             ) : (
-                <div className="self-center font-roboto-light-300">
+                <div className="self-center space-y-4 font-roboto-light-300">
                     <button
                         disabled={buttonDisabled}
                         onClick={async () => {
-                            setloading(true)
-                            if (devHash) {
-                                // @dev handle dev environment here
-                                hash = devHash
-                                signature = devSignature
-                                publicKey = devPublicKey
-                            }
-                            setcurrentStep('Downloading circuit...')
-                            const data = await (
-                                await axios.get(
-                                    process.env[
-                                        'NEXT_PUBLIC_CIRCUIT_URL'
-                                    ] as any
+                            try {
+                                setloading(true)
+                                seterrorMessage(null)
+                                if (devHash) {
+                                    // @dev handle dev environment here
+                                    hash = devHash
+                                    signature = devSignature
+                                    publicKey = devPublicKey
+                                }
+                                setcurrentStep('Downloading circuit...')
+                                const data = await (
+                                    await axios.get(
+                                        process.env[
+                                            'NEXT_PUBLIC_CIRCUIT_URL'
+                                        ] as any
+                                    )
+                                ).data
+                                const circuit = new snarkjs.Circuit(data)
+                                setcurrentStep('Computing witness circuit...')
+                                const input = Object.assign(
+                                    {},
+                                    splitToWords(signature, 64, 32, 'sign'),
+                                    splitToWords(exp, 64, 32, 'exp'),
+                                    splitToWords(publicKey, 64, 32, 'modulus'),
+                                    splitToWords(hash, 64, 4, 'hashed')
                                 )
-                            ).data
-                            const circuit = new snarkjs.Circuit(data)
-                            setcurrentStep('Computing witness circuit...')
-                            const input = Object.assign(
-                                {},
-                                splitToWords(signature, 64, 32, 'sign'),
-                                splitToWords(exp, 64, 32, 'exp'),
-                                splitToWords(publicKey, 64, 32, 'modulus'),
-                                splitToWords(hash, 64, 4, 'hashed')
-                            )
-                            const witness = circuit.calculateWitness(input)
-                            setcurrentStep('Generating proof...')
-                            console.log('Generating proof')
-                            workerRef.current!.postMessage({
-                                vkeyProof,
-                                witness,
-                            })
+                                const witness = circuit.calculateWitness(input)
+                                setcurrentStep('Generating proof...')
+                                workerRef.current!.postMessage({
+                                    vkeyProof,
+                                    witness,
+                                })
+                            } catch (error) {
+                                setloading(false)
+                                seterrorMessage(
+                                    'An error was encountered during proof generation.'
+                                )
+                            }
                         }}
                         className="font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2"
                     >
                         Generate proof
                     </button>
+                    <div className="text-gold">{errorMessage}</div>
                 </div>
             )}
         </div>
