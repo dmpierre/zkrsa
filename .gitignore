@@ -5,3 +5,4 @@ circuit*.json
 adhaar.pdf
 scripts/extract.ts
 *.pem
+.vercel

@@ -6,7 +6,7 @@ This repository's goal will be to perform verifications of rsa signatures and ge
 
 The `circom-rsa-verify` folder contains all necessary circuits and tests for carrying out such signature verifications. It has been cloned from [here](https://github.com/zkp-application/circom-rsa-verify). You should check it out! This allows us to perform proof generation and verification of valid RSA signatures.
 
-The `zkrsa-ui` contains the UI for generating or verifying proofs of valid RSA signatures using circom.
+The `frontend` folder contains the UI for generating or verifying proofs of valid RSA signatures using circom.
 
 ### Signing messages from the CLI
 

@@ -10,6 +10,11 @@ import { splitToWords } from '../utils/crypto'
 
 export const textEncoder = new TextEncoder()
 
+enum InputInvalidity {
+    MISSING = 'missing',
+    INVALID_CHARACTER = 'input should be integers only.',
+}
+
 export const InputText: FunctionComponent<TextInputProps> = ({
     setuserText,
 }) => {
@@ -26,6 +31,7 @@ export const InputText: FunctionComponent<TextInputProps> = ({
 }
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
+    const [invalidHash, setinvalidHash] = useState<string | null>(null)
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300  text-beige">
@@ -34,15 +40,31 @@ export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
             <input
                 className="border-b-2 font-work-sans text-beige pl-2 w-full focus:outline-none bg-inherit"
                 type="text"
-                onChange={(e) => sethash(e.target.value)}
+                onChange={(e) =>
+                    isValidIntegerInput(e.target.value, sethash, setinvalidHash)
+                }
             />
+            <div className="text-gold mt-2 text-sm">
+                {invalidHash ? invalidHash : <Fragment>&nbsp;</Fragment>}
+            </div>
         </div>
     )
 }
 
-enum InputInvalidity {
-    MISSING = 'missing',
-    INVALID_CHARACTER = 'invalid character detected',
+export const isValidIntegerInput = (
+    value: string,
+    setvalue: Dispatch<SetStateAction<any | null>>,
+    seterror: Dispatch<SetStateAction<any | null>>
+) => {
+    try {
+        const _ignore = splitToWords(value, 64, 32, 'sign')
+        setvalue(value)
+        seterror(null)
+        return true
+    } catch (error) {
+        seterror(InputInvalidity.INVALID_CHARACTER)
+        return false
+    }
 }
 
 export const InputSignature: FunctionComponent<InputSignature> = ({
@@ -51,30 +73,23 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
     const [invalidSignature, setinvalidSignature] = useState<string | null>(
         null
     )
-    const checkAndSetIfValid = (value: string) => {
-        if (value) {
-            try {
-                const _ignore = splitToWords(value, 64, 32, 'sign')
-                setsignature(value)
-                setinvalidSignature(null)
-            } catch (error) {
-                setinvalidSignature('Signature should be an integer.')
-            }
-        } else {
-            setinvalidSignature(null)
-        }
-    }
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
                 Enter signature:{' '}
             </div>
             <input
-                className="border-b-2 font-work-sans text-beige pl-2 w-full focus:outline-none bg-inherit"
+                className="border-b-2 w-full font-work-sans text-beige pl-2 w-full focus:outline-none bg-inherit"
                 type="text"
                 name=""
                 id=""
-                onChange={(e) => checkAndSetIfValid(e.target.value)}
+                onChange={(e) =>
+                    isValidIntegerInput(
+                        e.target.value,
+                        setsignature,
+                        setinvalidSignature
+                    )
+                }
             />
             <div className="text-gold mt-2 text-sm">
                 {invalidSignature ? (
@@ -90,6 +105,10 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
 export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     setpublicKey,
 }) => {
+    const [invalidPublicKey, setinvalidPublicKey] = useState<string | null>(
+        null
+    )
+
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
@@ -100,8 +119,21 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
                 type="text"
                 name=""
                 id=""
-                onChange={(e) => setpublicKey(e.target.value)}
+                onChange={(e) =>
+                    isValidIntegerInput(
+                        e.target.value,
+                        setpublicKey,
+                        setinvalidPublicKey
+                    )
+                }
             />
+            <div className="text-gold mt-2 text-sm">
+                {invalidPublicKey ? (
+                    invalidPublicKey
+                ) : (
+                    <Fragment>&nbsp;</Fragment>
+                )}
+            </div>
         </div>
     )
 }
@@ -129,10 +161,17 @@ export const InputProof: FunctionComponent<InputProof> = ({
                 Upload proof:{' '}
             </div>
             <input
-                className="font-work-sans pl-4 text-beige focus:outline-none bg-inherit"
+                className="hidden"
                 type="file"
+                id="proofFile"
                 onChange={handleChange}
             />
+            <label
+                className="m-5 hover:cursor-pointer hover:border-gold hover:border-b-2 font-work-sans text-beige focus:outline-none bg-inherit"
+                htmlFor="proofFile"
+            >
+                Choose file
+            </label>
         </div>
     )
 }
