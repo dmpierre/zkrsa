@@ -3,14 +3,11 @@ import {
     ButtonExportProof,
     ButtonInitializeVerifier,
 } from '../../src/components/Buttons'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import React from 'react'
 
 const setpublicSignals = jest.fn(() => {})
 const setproof = jest.fn(() => {})
-const setvkeyState = jest.fn(() => {})
-const setvkeyProof = jest.fn(() => {})
-const setvkeyVerifier = jest.fn(() => {})
 const setcompiledCircuit = jest.fn(() => {})
 
 jest.spyOn(React, 'useEffect').mockImplementation((f) => null)
