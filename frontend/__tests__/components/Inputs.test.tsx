@@ -30,17 +30,29 @@ describe('Testing Inputs', () => {
         })
     })
     describe('InputSignature', () => {
-        it('should ', () => {
+        it('should display error message on invalid input signature', async () => {
             const { container } = render(
                 <InputSignature setsignature={() => {}} />
             )
+            const input = container.getElementsByTagName('input')
+            await userEvent.type(input[0], 'a1234')
+            const element = await screen.findByText(
+                InputInvalidity.INVALID_CHARACTER
+            )
+            expect(element).toHaveTextContent(InputInvalidity.INVALID_CHARACTER)
         })
     })
     describe('InputPublicKey', () => {
-        it('should ', () => {
+        it('should display error message on invalid input public key', async () => {
             const { container } = render(
                 <InputPublicKey setpublicKey={() => {}} />
             )
+            const input = container.getElementsByTagName('input')
+            await userEvent.type(input[0], 'a1234')
+            const element = await screen.findByText(
+                InputInvalidity.INVALID_CHARACTER
+            )
+            expect(element).toHaveTextContent(InputInvalidity.INVALID_CHARACTER)
         })
     })
     describe('InputProof', () => {

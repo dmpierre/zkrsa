@@ -4,6 +4,7 @@ import { splitToWords } from './crypto'
 export enum InputInvalidity {
     MISSING = 'missing',
     INVALID_CHARACTER = 'input should be integers only.',
+    INVALID_PROOF_FILE = 'proof file is invalid.',
 }
 
 export const isValidIntegerInput = (
