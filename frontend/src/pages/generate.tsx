@@ -1,12 +1,12 @@
-import { NextPage } from 'next'
-import { Title, NavMenu } from '../components/Navigation'
-import { HashMessage } from '../components/Hashing'
-import { GenerateKeyPair, KeyPairDisplay } from '../components/GenerateKeyPair'
-import { FunctionComponent, useEffect, useState } from 'react'
-import { sign } from '../utils/crypto'
-import bigInt from 'big-integer'
+import { NextPage } from 'next';
+import { Title, NavMenu } from '../components/Navigation';
+import { HashMessage } from '../components/Hashing';
+import { GenerateKeyPair, KeyPairDisplay } from '../components/GenerateKeyPair';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { sign } from '../utils/crypto';
+import bigInt from 'big-integer';
 //@ts-ignore
-import ab2str from 'arraybuffer-to-string'
+import ab2str from 'arraybuffer-to-string';
 
 export const SignedMessage: FunctionComponent<SignedMessage> = ({
     keypair,
@@ -15,33 +15,35 @@ export const SignedMessage: FunctionComponent<SignedMessage> = ({
     signedMessage,
 }) => {
     useEffect(() => {
-        ;(async () => {
+        (async () => {
             if (message && keypair) {
                 const signedMessage = await sign(
                     keypair,
                     message,
                     new TextEncoder()
-                )
-                setSignedMessage(signedMessage)
+                );
+                setSignedMessage(signedMessage);
             }
-        })()
-    }, [keypair, message, setSignedMessage])
+        })();
+    }, [keypair, message, setSignedMessage]);
     const displayText = signedMessage
         ? bigInt(ab2str(signedMessage, 'hex'), 16).toString()
-        : ''
-    return <>{displayText}</>
-}
+        : '';
+    return <>{displayText}</>;
+};
 
 /**
  * Generate a new RSA key pair and sign a message with it.
  * @returns
  */
 const Generate: NextPage = () => {
-    const [userText, setuserText] = useState<string | null>(null)
-    const [hashValue, sethashValue] = useState<string | null>(null)
-    const [keyPair, setkeyPair] = useState<null | CryptoKeyPair>(null)
-    const [jsonPublicKey, setjsonPublicKey] = useState<null | JsonWebKey>(null)
-    const [signedMessage, setsignedMessage] = useState<null | ArrayBuffer>(null)
+    const [userText, setuserText] = useState<string | null>(null);
+    const [hashValue, sethashValue] = useState<string | null>(null);
+    const [keyPair, setkeyPair] = useState<null | CryptoKeyPair>(null);
+    const [jsonPublicKey, setjsonPublicKey] = useState<null | JsonWebKey>(null);
+    const [signedMessage, setsignedMessage] = useState<null | ArrayBuffer>(
+        null
+    );
 
     return (
         <div>
@@ -65,7 +67,7 @@ const Generate: NextPage = () => {
                 keypair={keyPair}
             ></SignedMessage>
         </div>
-    )
-}
+    );
+};
 
-export default Generate
+export default Generate;

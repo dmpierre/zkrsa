@@ -2,15 +2,15 @@ import {
     ButtonGenerateProof,
     ButtonExportProof,
     ButtonInitializeVerifier,
-} from '../../src/components/Buttons'
-import { render } from '@testing-library/react'
-import React from 'react'
+} from '../../src/components/Buttons';
+import { render } from '@testing-library/react';
+import React from 'react';
 
-const setpublicSignals = jest.fn(() => {})
-const setproof = jest.fn(() => {})
-const setcompiledCircuit = jest.fn(() => {})
+const setpublicSignals = jest.fn(() => {});
+const setproof = jest.fn(() => {});
+const setcompiledCircuit = jest.fn(() => {});
 
-jest.spyOn(React, 'useEffect').mockImplementation((f) => null)
+jest.spyOn(React, 'useEffect').mockImplementation((f) => null);
 
 describe('Testing buttons', () => {
     describe('ButtonGenerateProof', () => {
@@ -27,10 +27,10 @@ describe('Testing buttons', () => {
                     vkeyProof={''}
                     vkeyVerifier={''}
                 />
-            )
-            const button = container.querySelector('button')
-            expect(button).toBeDisabled()
-        })
+            );
+            const button = container.querySelector('button');
+            expect(button).toBeDisabled();
+        });
         it('enables button when vkeyProof && hash && signature && publicKey is truthy', () => {
             const { container } = render(
                 <ButtonGenerateProof
@@ -43,11 +43,11 @@ describe('Testing buttons', () => {
                     vkeyProof={'someProof'}
                     vkeyVerifier={''}
                 />
-            )
-            const button = container.querySelector('button')
-            expect(button).toBeEnabled()
-        })
-    })
+            );
+            const button = container.querySelector('button');
+            expect(button).toBeEnabled();
+        });
+    });
     describe('Testing ButtonExportProof', () => {
         it("displays a 'Download' text when there are proof and public signals", () => {
             const { container } = render(
@@ -55,17 +55,17 @@ describe('Testing buttons', () => {
                     proof={'proof'}
                     publicSignals={'publicSignal'}
                 />
-            )
-            const buttonLink = container.querySelector('a')
-            expect(buttonLink?.text).toEqual('Download')
-        })
+            );
+            const buttonLink = container.querySelector('a');
+            expect(buttonLink?.text).toEqual('Download');
+        });
         it('does not display anything when there are no proof and public signals', () => {
             const { container } = render(
                 <ButtonExportProof proof={null} publicSignals={null} />
-            )
-            expect(container.children).toHaveLength(0)
-        })
-    })
+            );
+            expect(container.children).toHaveLength(0);
+        });
+    });
     describe('Testing ButtonInitializeVerifier', () => {
         it("displays a 'Initialize' text button when not loading", () => {
             const { container } = render(
@@ -74,9 +74,9 @@ describe('Testing buttons', () => {
                     setvkeyProof={undefined}
                     setvkeyVerifier={undefined}
                 />
-            )
-            const button = container.querySelector('button')
-            expect(button).toHaveTextContent('Initialize')
-        })
-    })
-})
+            );
+            const button = container.querySelector('button');
+            expect(button).toHaveTextContent('Initialize');
+        });
+    });
+});

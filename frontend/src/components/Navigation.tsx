@@ -1,7 +1,7 @@
-import { NextComponentType } from 'next'
-import Link from 'next/link'
-import Image from 'next/image'
-import github from '../../public/github.png'
+import { NextComponentType } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import github from '../../public/github.png';
 
 export const NavMenu: NextComponentType = () => {
     return (
@@ -17,8 +17,8 @@ export const NavMenu: NextComponentType = () => {
                 </a>
             </Link>
         </div>
-    )
-}
+    );
+};
 
 export const Title: NextComponentType = () => {
     return (
@@ -27,8 +27,8 @@ export const Title: NextComponentType = () => {
                 zkRSA signature verification
             </div>
         </div>
-    )
-}
+    );
+};
 
 export const Footer: NextComponentType = () => {
     return (
@@ -58,8 +58,8 @@ export const Footer: NextComponentType = () => {
                 </a>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export const Description: NextComponentType = () => {
     return (
@@ -76,5 +76,5 @@ export const Description: NextComponentType = () => {
                 .
             </div>
         </div>
-    )
-}
+    );
+};

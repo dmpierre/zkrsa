@@ -1,19 +1,23 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
+import type { NextPage } from 'next';
+import { useState } from 'react';
 import {
     ButtonInitializeVerifier,
     ButtonGenerateProof,
     ButtonExportProof,
-} from '../components/Buttons'
-import { InputHash, InputPublicKey, InputSignature } from '../components/Inputs'
-import { NavMenu, Title, Description, Footer } from '../components/Navigation'
-import { StatusVKey } from '../components/Status'
+} from '../components/Buttons';
+import {
+    InputHash,
+    InputPublicKey,
+    InputSignature,
+} from '../components/Inputs';
+import { NavMenu, Title, Description, Footer } from '../components/Navigation';
+import { StatusVKey } from '../components/Status';
 /**
  * @dev for exporting json proof and public signals data
  */
-;(BigInt.prototype as any).toJSON = function () {
-    return this.toString()
-}
+(BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+};
 
 const Home: NextPage<AppPageProps> = ({
     proof,
@@ -25,11 +29,11 @@ const Home: NextPage<AppPageProps> = ({
     vkeyProof,
     setvkeyProof,
 }) => {
-    const [hash, sethash] = useState<null | string>(null)
-    const [signature, setsignature] = useState<null | string>(null)
-    const [publicKey, setpublicKey] = useState<null | string>(null)
-    const [publicSignals, setpublicSignals] = useState<null | any>(null)
-    const [compiledCircuit, setcompiledCircuit] = useState(null)
+    const [hash, sethash] = useState<null | string>(null);
+    const [signature, setsignature] = useState<null | string>(null);
+    const [publicKey, setpublicKey] = useState<null | string>(null);
+    const [publicSignals, setpublicSignals] = useState<null | any>(null);
+    const [compiledCircuit, setcompiledCircuit] = useState(null);
 
     return (
         <div>
@@ -69,6 +73,6 @@ const Home: NextPage<AppPageProps> = ({
             </div>
             <Footer></Footer>
         </div>
-    )
-}
-export default Home
+    );
+};
+export default Home;

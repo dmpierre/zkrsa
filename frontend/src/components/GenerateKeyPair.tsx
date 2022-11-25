@@ -1,14 +1,14 @@
-import bigInt from 'big-integer'
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
-import { generateRSAKeyPair } from '../utils/crypto'
+import bigInt from 'big-integer';
+import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react';
+import { generateRSAKeyPair } from '../utils/crypto';
 
 interface GenerateKeyPair {
-    setkeyPair: Dispatch<SetStateAction<null | CryptoKeyPair>>
-    setjsonPublicKey: Dispatch<SetStateAction<null | JsonWebKey>>
+    setkeyPair: Dispatch<SetStateAction<null | CryptoKeyPair>>;
+    setjsonPublicKey: Dispatch<SetStateAction<null | JsonWebKey>>;
 }
 
 interface KeyPairDisplay {
-    keypair: null | JsonWebKey
+    keypair: null | JsonWebKey;
 }
 
 export const KeyPairDisplay: FunctionComponent<KeyPairDisplay> = ({
@@ -19,13 +19,13 @@ export const KeyPairDisplay: FunctionComponent<KeyPairDisplay> = ({
               Buffer.from(keypair.n!, 'base64').toString('hex'),
               16
           ).toString()
-        : null
+        : null;
     return (
         <>
             <div>{hexPubKey}</div>
         </>
-    )
-}
+    );
+};
 
 export const GenerateKeyPair: FunctionComponent<GenerateKeyPair> = ({
     setkeyPair,
@@ -36,13 +36,13 @@ export const GenerateKeyPair: FunctionComponent<GenerateKeyPair> = ({
             <div className="my-5 ml-10">
                 <button
                     onClick={async () => {
-                        const keypair = await generateRSAKeyPair()
-                        setkeyPair(keypair)
+                        const keypair = await generateRSAKeyPair();
+                        setkeyPair(keypair);
                         const jsonPubKey = await window.crypto.subtle.exportKey(
                             'jwk',
                             keypair.publicKey
-                        )
-                        setjsonPublicKey(jsonPubKey)
+                        );
+                        setjsonPublicKey(jsonPubKey);
                     }}
                     className="border-black border-2"
                 >
@@ -50,5 +50,5 @@ export const GenerateKeyPair: FunctionComponent<GenerateKeyPair> = ({
                 </button>
             </div>
         </>
-    )
-}
+    );
+};

@@ -1,7 +1,7 @@
-import { ChangeEvent, Fragment, FunctionComponent, useState } from 'react'
-import { InputInvalidity, isValidIntegerInput } from '../utils/inputs'
+import { ChangeEvent, Fragment, FunctionComponent, useState } from 'react';
+import { InputInvalidity, isValidIntegerInput } from '../utils/inputs';
 
-export const textEncoder = new TextEncoder()
+export const textEncoder = new TextEncoder();
 
 export const InputText: FunctionComponent<TextInputProps> = ({
     setuserText,
@@ -15,11 +15,11 @@ export const InputText: FunctionComponent<TextInputProps> = ({
                 onChange={(e) => setuserText(e.target.value)}
             />
         </div>
-    )
-}
+    );
+};
 
 export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
-    const [invalidHash, setinvalidHash] = useState<string | null>(null)
+    const [invalidHash, setinvalidHash] = useState<string | null>(null);
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300  text-beige">
@@ -36,15 +36,15 @@ export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
                 {invalidHash ? invalidHash : <Fragment>&nbsp;</Fragment>}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export const InputSignature: FunctionComponent<InputSignature> = ({
     setsignature,
 }) => {
     const [invalidSignature, setinvalidSignature] = useState<string | null>(
         null
-    )
+    );
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
             <div className="font-roboto-light-300 text-beige">
@@ -71,15 +71,15 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     setpublicKey,
 }) => {
     const [invalidPublicKey, setinvalidPublicKey] = useState<string | null>(
         null
-    )
+    );
 
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
@@ -107,47 +107,49 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
 const validateProofJSON = (proofFile: any) => {
-    const expectedKeys = ['proof', 'publicSignals']
+    const expectedKeys = ['proof', 'publicSignals'];
     if (Object.keys(proofFile).length != 2)
-        throw Error('Proof file has too many keys')
+        throw Error('Proof file has too many keys');
     Object.keys(proofFile).map((k, i) => {
         if (expectedKeys[i] !== k)
-            throw Error('Proof file does not have required keys')
-    })
-    return true
-}
+            throw Error('Proof file does not have required keys');
+    });
+    return true;
+};
 
 export const InputProof: FunctionComponent<InputProof> = ({
     setuploadedProof,
 }) => {
-    const [fileInvalid, setfileInvalid] = useState<null | InputInvalidity>(null)
-    const [fileName, setfileName] = useState<null | string>(null)
+    const [fileInvalid, setfileInvalid] = useState<null | InputInvalidity>(
+        null
+    );
+    const [fileName, setfileName] = useState<null | string>(null);
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const fileReader = new FileReader()
-            fileReader.readAsText(e.target.files[0], 'UTF-8')
-            const userFilename = e.target.files[0].name
+            const fileReader = new FileReader();
+            fileReader.readAsText(e.target.files[0], 'UTF-8');
+            const userFilename = e.target.files[0].name;
             fileReader.onload = (e) => {
                 if (e.target) {
                     try {
-                        const proof = JSON.parse(e.target.result as string)
-                        const isValid = validateProofJSON(proof)
-                        setfileName(userFilename)
-                        setuploadedProof(proof)
-                        setfileInvalid(null)
+                        const proof = JSON.parse(e.target.result as string);
+                        const isValid = validateProofJSON(proof);
+                        setfileName(userFilename);
+                        setuploadedProof(proof);
+                        setfileInvalid(null);
                     } catch (error) {
-                        setfileName(userFilename)
-                        setuploadedProof(null)
-                        setfileInvalid(InputInvalidity.INVALID_PROOF_FILE)
+                        setfileName(userFilename);
+                        setuploadedProof(null);
+                        setfileInvalid(InputInvalidity.INVALID_PROOF_FILE);
                     }
                 }
-            }
+            };
         }
-    }
+    };
 
     return (
         <div className="w-10/12 sm:w-1/3 border-gold border-4 pt-7 pb-7 rounded-2xl shadow-xl">
@@ -174,5 +176,5 @@ export const InputProof: FunctionComponent<InputProof> = ({
                 {fileInvalid ? `${fileName} ${fileInvalid}` : fileName}
             </div>
         </div>
-    )
-}
+    );
+};

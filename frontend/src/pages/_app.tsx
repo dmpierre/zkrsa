@@ -1,13 +1,13 @@
-import '../../styles/globals.css'
+import '../../styles/globals.css';
 
-import type { AppProps } from 'next/app'
-import { useState } from 'react'
+import type { AppProps } from 'next/app';
+import { useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [vkeyVerifier, setvkeyVerifier] = useState<null | any>(null)
-    const [vkeyProof, setvkeyProof] = useState<null | any>(null) // typing for vkey?
-    const [vkeyState, setvkeyState] = useState('Verifier not initialized')
-    const [proof, setproof] = useState<null | string>(null)
+    const [vkeyVerifier, setvkeyVerifier] = useState<null | any>(null);
+    const [vkeyProof, setvkeyProof] = useState<null | any>(null); // typing for vkey?
+    const [vkeyState, setvkeyState] = useState('Verifier not initialized');
+    const [proof, setproof] = useState<null | string>(null);
 
     return (
         <Component
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             vkeyVerifier={vkeyVerifier}
             setvkeyVerifier={setvkeyVerifier}
         />
-    )
+    );
 }
 
-export default MyApp
+export default MyApp;

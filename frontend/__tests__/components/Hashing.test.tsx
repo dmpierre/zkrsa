@@ -1,8 +1,8 @@
-import { render } from '@testing-library/react'
-import { HashMessage } from '../../src/components/Hashing'
-import React from 'react'
+import { render } from '@testing-library/react';
+import { HashMessage } from '../../src/components/Hashing';
+import React from 'react';
 
-jest.spyOn(React, 'useEffect').mockImplementation((f) => {})
+jest.spyOn(React, 'useEffect').mockImplementation((f) => {});
 
 describe('Testing Hashing', () => {
     describe('HashMessage', () => {
@@ -14,8 +14,8 @@ describe('Testing Hashing', () => {
                     userText={'hello'}
                     hashValue={'someHash'}
                 />
-            )
-            expect(container).toHaveTextContent('someHash')
-        })
-    })
-})
+            );
+            expect(container).toHaveTextContent('someHash');
+        });
+    });
+});

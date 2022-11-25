@@ -1,4 +1,4 @@
-import bigInt from 'big-integer'
+import bigInt from 'big-integer';
 
 export const generateRSAKeyPair = async (): Promise<CryptoKeyPair> => {
     const keyPair = await window.crypto.subtle.generateKey(
@@ -10,17 +10,17 @@ export const generateRSAKeyPair = async (): Promise<CryptoKeyPair> => {
         },
         true,
         ['sign', 'verify']
-    )
-    return keyPair
-}
+    );
+    return keyPair;
+};
 
 export const hash = async (message: string, textEncoder: TextEncoder) => {
     const digest = await window.crypto.subtle.digest(
         'SHA-256',
         textEncoder.encode(message)
-    )
-    return digest
-}
+    );
+    return digest;
+};
 
 export const sign = async (
     RSAKeyPair: CryptoKeyPair,
@@ -31,23 +31,23 @@ export const sign = async (
         'RSASSA-PKCS1-v1_5',
         RSAKeyPair.privateKey,
         textEncoder.encode(message)
-    )
-    return signature
-}
+    );
+    return signature;
+};
 
 //@ts-ignore
 export function splitToWords(x, w, n, name) {
-    let t = bigInt(x)
-    w = bigInt(w)
-    n = bigInt(n)
-    const words = {}
+    let t = bigInt(x);
+    w = bigInt(w);
+    n = bigInt(n);
+    const words = {};
     for (let i = 0; i < n; ++i) {
         //@ts-ignore
-        words[`${name}[${i}]`] = `${t.mod(bigInt(2).pow(w))}`
-        t = t.divide(bigInt(2).pow(w))
+        words[`${name}[${i}]`] = `${t.mod(bigInt(2).pow(w))}`;
+        t = t.divide(bigInt(2).pow(w));
     }
     if (!t.isZero()) {
-        throw `Number ${x} does not fit in ${w * n} bits`
+        throw `Number ${x} does not fit in ${w * n} bits`;
     }
-    return words
+    return words;
 }

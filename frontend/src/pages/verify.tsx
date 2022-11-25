@@ -1,24 +1,24 @@
-import type { NextPage } from 'next'
-import { StatusVKey } from '../components/Status'
-import { ButtonInitializeVerifier, theme } from '../components/Buttons'
-import { Title, NavMenu, Description, Footer } from '../components/Navigation'
-import { useState } from 'react'
-import CircularProgress from '@mui/material/CircularProgress'
-import { ThemeProvider } from '@mui/material/styles'
+import type { NextPage } from 'next';
+import { StatusVKey } from '../components/Status';
+import { ButtonInitializeVerifier, theme } from '../components/Buttons';
+import { Title, NavMenu, Description, Footer } from '../components/Navigation';
+import { useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import { ThemeProvider } from '@mui/material/styles';
 
 //@ts-ignore
-import snarkjs from 'snarkjs'
+import snarkjs from 'snarkjs';
 //@ts-ignore
-import { unstringifyBigInts } from 'snarkjs/src/stringifybigint'
-import { InputProof } from '../components/Inputs'
+import { unstringifyBigInts } from 'snarkjs/src/stringifybigint';
+import { InputProof } from '../components/Inputs';
 
 const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     return snarkjs.original.isValid(
         unstringifyBigInts(vkeyVerifier),
         unstringifyBigInts(proof),
         unstringifyBigInts(publicSignals)
-    )
-}
+    );
+};
 
 const Verify: NextPage<AppPageProps> = ({
     proof,
@@ -30,9 +30,9 @@ const Verify: NextPage<AppPageProps> = ({
     vkeyProof,
     setvkeyProof,
 }) => {
-    const [uploadedProof, setuploadedProof] = useState<any | null>(null)
-    const [proofValidity, setproofValidity] = useState<boolean | null>(null)
-    const [verifying, setverifying] = useState(false)
+    const [uploadedProof, setuploadedProof] = useState<any | null>(null);
+    const [proofValidity, setproofValidity] = useState<boolean | null>(null);
+    const [verifying, setverifying] = useState(false);
 
     return (
         <div>
@@ -62,14 +62,14 @@ const Verify: NextPage<AppPageProps> = ({
                 ) : (
                     <button
                         onClick={() => {
-                            setverifying(true)
+                            setverifying(true);
                             const proofValidity = validity(
                                 vkeyVerifier,
                                 uploadedProof.proof,
                                 uploadedProof.publicSignals
-                            )
-                            setproofValidity(proofValidity)
-                            setverifying(false)
+                            );
+                            setproofValidity(proofValidity);
+                            setverifying(false);
                         }}
                         className="font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2"
                         disabled={uploadedProof && vkeyVerifier ? false : true}
@@ -85,7 +85,7 @@ const Verify: NextPage<AppPageProps> = ({
             ) : null}
             <Footer></Footer>
         </div>
-    )
-}
+    );
+};
 
-export default Verify
+export default Verify;

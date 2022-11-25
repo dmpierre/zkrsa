@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
-import { splitToWords } from './crypto'
+import { Dispatch, SetStateAction } from 'react';
+import { splitToWords } from './crypto';
 
 export enum InputInvalidity {
     MISSING = 'missing',
@@ -13,12 +13,12 @@ export const isValidIntegerInput = (
     seterror: Dispatch<SetStateAction<any | null>>
 ) => {
     try {
-        const _ignore = splitToWords(value, 64, 32, 'sign')
-        setvalue(value)
-        seterror(null)
-        return true
+        const _ignore = splitToWords(value, 64, 32, 'sign');
+        setvalue(value);
+        seterror(null);
+        return true;
     } catch (error) {
-        seterror(InputInvalidity.INVALID_CHARACTER)
-        return false
+        seterror(InputInvalidity.INVALID_CHARACTER);
+        return false;
     }
-}
+};
