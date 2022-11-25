@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, FunctionComponent, useState } from 'react'
-import { isValidIntegerInput } from '../utils/inputs'
+import { InputInvalidity, isValidIntegerInput } from '../utils/inputs'
 
 export const textEncoder = new TextEncoder()
 
@@ -110,18 +110,40 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     )
 }
 
+const validateProofJSON = (proofFile: any) => {
+    const expectedKeys = ['proof', 'publicSignals']
+    if (Object.keys(proofFile).length != 2)
+        throw Error('Proof file has too many keys')
+    Object.keys(proofFile).map((k, i) => {
+        if (expectedKeys[i] !== k)
+            throw Error('Proof file does not have required keys')
+    })
+    return true
+}
+
 export const InputProof: FunctionComponent<InputProof> = ({
     setuploadedProof,
 }) => {
+    const [fileInvalid, setfileInvalid] = useState<null | InputInvalidity>(null)
+    const [fileName, setfileName] = useState<null | string>(null)
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const fileReader = new FileReader()
             fileReader.readAsText(e.target.files[0], 'UTF-8')
+            const userFilename = e.target.files[0].name
             fileReader.onload = (e) => {
                 if (e.target) {
-                    const proof = JSON.parse(e.target.result as string)
-                    console.log(proof)
-                    setuploadedProof(proof)
+                    try {
+                        const proof = JSON.parse(e.target.result as string)
+                        const isValid = validateProofJSON(proof)
+                        setfileName(userFilename)
+                        setuploadedProof(proof)
+                        setfileInvalid(null)
+                    } catch (error) {
+                        setfileName(userFilename)
+                        setuploadedProof(null)
+                        setfileInvalid(InputInvalidity.INVALID_PROOF_FILE)
+                    }
                 }
             }
         }
@@ -132,18 +154,25 @@ export const InputProof: FunctionComponent<InputProof> = ({
             <div className="pl-4 font-roboto-light-300 text-beige mb-3">
                 Upload proof:{' '}
             </div>
-            <input
-                className="hidden"
-                type="file"
-                id="proofFile"
-                onChange={handleChange}
-            />
-            <label
-                className="m-5 hover:cursor-pointer hover:border-gold hover:border-b-2 font-work-sans text-beige focus:outline-none bg-inherit"
-                htmlFor="proofFile"
-            >
-                Choose file
-            </label>
+            <div className="flex">
+                <div>
+                    <input
+                        className="hidden"
+                        type="file"
+                        id="proofFile"
+                        onChange={handleChange}
+                    />
+                    <label
+                        className="m-5 hover:cursor-pointer hover:border-gold hover:border-b-2 font-work-sans text-beige focus:outline-none bg-inherit"
+                        htmlFor="proofFile"
+                    >
+                        Choose file
+                    </label>
+                </div>
+            </div>
+            <div className="ml-5 text-gold mt-2 text-sm">
+                {fileInvalid ? `${fileName} ${fileInvalid}` : fileName}
+            </div>
         </div>
     )
 }
