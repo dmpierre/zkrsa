@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
+import { PropsStatusVKey } from '../types';
 
-export const StatusVKey: FunctionComponent<StatusVKey> = ({
+export const StatusVKey: FunctionComponent<PropsStatusVKey> = ({
     vkey,
     vkeyState,
 }) => {

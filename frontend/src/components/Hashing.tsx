@@ -4,8 +4,9 @@ import { hash } from '../utils/crypto';
 import { InputText } from './Inputs';
 //@ts-ignore
 import * as ab2str from 'arraybuffer-to-string';
+import { PropsHashMessage, PropsHashText } from '../types';
 
-const HashText: FunctionComponent<HashText> = ({
+const HashText: FunctionComponent<PropsHashText> = ({
     text,
     hashValue,
     sethashValue,
@@ -33,7 +34,7 @@ const HashText: FunctionComponent<HashText> = ({
     );
 };
 
-export const HashMessage: FunctionComponent<HashMessage> = ({
+export const HashMessage: FunctionComponent<PropsHashMessage> = ({
     sethashValue,
     setuserText,
     userText,

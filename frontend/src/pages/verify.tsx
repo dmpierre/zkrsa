@@ -11,6 +11,7 @@ import snarkjs from 'snarkjs';
 //@ts-ignore
 import { unstringifyBigInts } from 'snarkjs/src/stringifybigint';
 import { InputProof } from '../components/Inputs';
+import { PropsAppPage } from '../types';
 
 const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     return snarkjs.original.isValid(
@@ -20,9 +21,7 @@ const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     );
 };
 
-const Verify: NextPage<AppPageProps> = ({
-    proof,
-    setproof,
+const Verify: NextPage<PropsAppPage> = ({
     vkeyState,
     setvkeyState,
     vkeyVerifier,

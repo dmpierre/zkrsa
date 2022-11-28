@@ -1,4 +1,11 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import {
+    Dispatch,
+    FunctionComponent,
+    SetStateAction,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { splitToWords } from '../utils/crypto';
 //@ts-ignore
 import snarkjs from 'snarkjs';
@@ -7,6 +14,12 @@ import snarkjs from 'snarkjs';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+    SetVkeyProof,
+    PropsButtonGenerateProof,
+    Proof,
+    PropsButtonExportProof,
+} from '../types';
 
 const exp = '65537';
 const devHash = process.env['NEXT_PUBLIC_HASH'] as string | null;
@@ -21,14 +34,9 @@ export const theme = createTheme({
     },
 });
 
-export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({
-    setpublicSignals,
-    setproof,
-    hash,
-    signature,
-    publicKey,
-    vkeyProof,
-}) => {
+export const ButtonGenerateProof: FunctionComponent<
+    PropsButtonGenerateProof
+> = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof }) => {
     const buttonDisabled =
         vkeyProof && hash && signature && publicKey ? false : true;
     const [loading, setloading] = useState(false);
@@ -40,7 +48,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({
             new URL('../worker/generateProof.ts', import.meta.url)
         );
         workerRef.current.onmessage = (
-            e: MessageEvent<{ proof: any; publicSignals: any }>
+            e: MessageEvent<{ proof: Proof; publicSignals: string[] }>
         ) => {
             setproof(e.data.proof);
             setpublicSignals(e.data.publicSignals);
@@ -123,12 +131,7 @@ export const ButtonGenerateProof: FunctionComponent<ButtonGenerateProof> = ({
     );
 };
 
-interface ButtonExportProof {
-    proof: any;
-    publicSignals: any;
-}
-
-export const ButtonExportProof: FunctionComponent<ButtonExportProof> = ({
+export const ButtonExportProof: FunctionComponent<PropsButtonExportProof> = ({
     proof,
     publicSignals,
 }) => {
@@ -151,6 +154,13 @@ export const ButtonExportProof: FunctionComponent<ButtonExportProof> = ({
         </>
     );
 };
+
+interface ButtonInitializeVerifier {
+    setvkeyState: Dispatch<SetStateAction<string>>;
+    setvkeyProof: SetVkeyProof;
+    setvkeyVerifier: Dispatch<SetStateAction<any | null>>;
+}
+
 export const ButtonInitializeVerifier: FunctionComponent<
     ButtonInitializeVerifier
 > = ({ setvkeyState, setvkeyProof, setvkeyVerifier }) => {
