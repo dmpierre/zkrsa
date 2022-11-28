@@ -1,17 +1,12 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import {
-    ButtonInitializeVerifier,
-    ButtonGenerateProof,
-    ButtonExportProof,
-} from '../components/Buttons';
+import { ButtonGenerateProof, ButtonExportProof } from '../components/Buttons';
 import {
     InputHash,
     InputPublicKey,
     InputSignature,
 } from '../components/Inputs';
 import { NavMenu, Title, Description, Footer } from '../components/Navigation';
-import { StatusVKey } from '../components/Status';
 import { PropsAppPage } from '../types';
 /**
  * @dev for exporting json proof and public signals data
@@ -41,14 +36,6 @@ const Home: NextPage<PropsAppPage> = ({
             <Title></Title>
             <Description></Description>
             <NavMenu></NavMenu>
-            <div className="flex justify-center my-4">
-                <StatusVKey vkeyState={vkeyState} vkey={vkeyProof}></StatusVKey>
-                <ButtonInitializeVerifier
-                    setvkeyState={setvkeyState}
-                    setvkeyVerifier={setvkeyVerifier}
-                    setvkeyProof={setvkeyProof}
-                ></ButtonInitializeVerifier>
-            </div>
             <div className="flex flex-col space-y-10 items-center">
                 <InputHash sethash={sethash}></InputHash>
                 <InputSignature setsignature={setsignature}></InputSignature>

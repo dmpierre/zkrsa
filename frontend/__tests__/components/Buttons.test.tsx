@@ -66,17 +66,4 @@ describe('Testing buttons', () => {
             expect(container.children).toHaveLength(0);
         });
     });
-    describe('Testing ButtonInitializeVerifier', () => {
-        it("displays a 'Initialize' text button when not loading", () => {
-            const { container } = render(
-                <ButtonInitializeVerifier
-                    setvkeyState={undefined}
-                    setvkeyProof={undefined}
-                    setvkeyVerifier={undefined}
-                />
-            );
-            const button = container.querySelector('button');
-            expect(button).toHaveTextContent('Initialize');
-        });
-    });
 });

@@ -37,8 +37,7 @@ export const theme = createTheme({
 export const ButtonGenerateProof: FunctionComponent<
     PropsButtonGenerateProof
 > = ({ setpublicSignals, setproof, hash, signature, publicKey, vkeyProof }) => {
-    const buttonDisabled =
-        vkeyProof && hash && signature && publicKey ? false : true;
+    const buttonDisabled = hash && signature && publicKey ? false : true;
     const [loading, setloading] = useState(false);
     const workerRef = useRef<Worker>();
     const [currentStep, setcurrentStep] = useState('');
@@ -90,7 +89,9 @@ export const ButtonGenerateProof: FunctionComponent<
                                     signature = devSignature;
                                     publicKey = devPublicKey;
                                 }
-                                setcurrentStep('Downloading circuit...');
+                                setcurrentStep(
+                                    'Downloading circuit and vkeys...'
+                                );
                                 const data = await (
                                     await axios.get(
                                         process.env[
@@ -99,7 +100,13 @@ export const ButtonGenerateProof: FunctionComponent<
                                     )
                                 ).data;
                                 const circuit = new snarkjs.Circuit(data);
-                                setcurrentStep('Computing witness circuit...');
+                                const vkeyProof = (
+                                    await axios.get(
+                                        process.env[
+                                            'NEXT_PUBLIC_VKEY_URL'
+                                        ] as string
+                                    )
+                                ).data;
                                 const input = Object.assign(
                                     {},
                                     splitToWords(signature, 64, 32, 'sign'),
