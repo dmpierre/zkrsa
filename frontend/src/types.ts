@@ -9,7 +9,7 @@ export interface PropsStatusVKey {
 }
 
 export interface PropsButtonGenerateProof {
-    setpublicSignals: Dispatch<string[]>;
+    setpublicSignals: Dispatch<SetStateAction<string[]>>;
     setproof: SetProof;
     setcompiledCircuit: Dispatch<SetStateAction<null>>;
     hash: string | null;
@@ -25,13 +25,13 @@ export interface PropsAppPage {
     vkeyState: string;
     setvkeyState: Dispatch<SetStateAction<string>>;
     vkeyVerifier: null | any;
-    setvkeyVerifier: Dispatch<any>;
+    setvkeyVerifier: Dispatch<SetStateAction<any>>;
     vkeyProof: null | any;
     setvkeyProof: SetVkeyProof;
 }
 
 export interface PropsInputProof {
-    setuploadedProof: Dispatch<any>;
+    setuploadedProof: Dispatch<SetStateAction<DownloadableProof | null>>;
 }
 
 export interface PropsHashMessage {
@@ -86,4 +86,9 @@ export interface Proof {
     pi_kp: string[];
     pi_h: string[];
     protocol: string;
+}
+
+export interface DownloadableProof {
+    proof: Proof;
+    publicSignals: string[];
 }
