@@ -12,6 +12,7 @@ import {
 } from '../components/Inputs';
 import { NavMenu, Title, Description, Footer } from '../components/Navigation';
 import { StatusVKey } from '../components/Status';
+import { PropsAppPage } from '../types';
 /**
  * @dev for exporting json proof and public signals data
  */
@@ -19,7 +20,7 @@ import { StatusVKey } from '../components/Status';
     return this.toString();
 };
 
-const Home: NextPage<AppPageProps> = ({
+const Home: NextPage<PropsAppPage> = ({
     proof,
     setproof,
     vkeyState,

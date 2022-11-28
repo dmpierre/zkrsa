@@ -22,3 +22,14 @@ export const isValidIntegerInput = (
         return false;
     }
 };
+
+export const validateProofJSON = (proofFile: any) => {
+    const expectedKeys = ['proof', 'publicSignals'];
+    if (Object.keys(proofFile).length != 2)
+        throw Error('Proof file has too many keys');
+    Object.keys(proofFile).map((k, i) => {
+        if (expectedKeys[i] !== k)
+            throw Error('Proof file does not have required keys');
+    });
+    return true;
+};

@@ -1,9 +1,20 @@
 import { ChangeEvent, Fragment, FunctionComponent, useState } from 'react';
-import { InputInvalidity, isValidIntegerInput } from '../utils/inputs';
+import {
+    PropsInputHash,
+    PropsInputProof,
+    PropsInputPublicKey,
+    PropsInputSignature,
+    PropsTextInput,
+} from '../types';
+import {
+    InputInvalidity,
+    isValidIntegerInput,
+    validateProofJSON,
+} from '../utils/inputs';
 
 export const textEncoder = new TextEncoder();
 
-export const InputText: FunctionComponent<TextInputProps> = ({
+export const InputText: FunctionComponent<PropsTextInput> = ({
     setuserText,
 }) => {
     return (
@@ -18,7 +29,7 @@ export const InputText: FunctionComponent<TextInputProps> = ({
     );
 };
 
-export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
+export const InputHash: FunctionComponent<PropsInputHash> = ({ sethash }) => {
     const [invalidHash, setinvalidHash] = useState<string | null>(null);
     return (
         <div className="border-gold space-y-2 sm:w-1/3 border-4 p-4 rounded-2xl shadow-xl">
@@ -39,7 +50,7 @@ export const InputHash: FunctionComponent<InputHash> = ({ sethash }) => {
     );
 };
 
-export const InputSignature: FunctionComponent<InputSignature> = ({
+export const InputSignature: FunctionComponent<PropsInputSignature> = ({
     setsignature,
 }) => {
     const [invalidSignature, setinvalidSignature] = useState<string | null>(
@@ -74,7 +85,7 @@ export const InputSignature: FunctionComponent<InputSignature> = ({
     );
 };
 
-export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
+export const InputPublicKey: FunctionComponent<PropsInputPublicKey> = ({
     setpublicKey,
 }) => {
     const [invalidPublicKey, setinvalidPublicKey] = useState<string | null>(
@@ -110,18 +121,7 @@ export const InputPublicKey: FunctionComponent<InputPublicKey> = ({
     );
 };
 
-const validateProofJSON = (proofFile: any) => {
-    const expectedKeys = ['proof', 'publicSignals'];
-    if (Object.keys(proofFile).length != 2)
-        throw Error('Proof file has too many keys');
-    Object.keys(proofFile).map((k, i) => {
-        if (expectedKeys[i] !== k)
-            throw Error('Proof file does not have required keys');
-    });
-    return true;
-};
-
-export const InputProof: FunctionComponent<InputProof> = ({
+export const InputProof: FunctionComponent<PropsInputProof> = ({
     setuploadedProof,
 }) => {
     const [fileInvalid, setfileInvalid] = useState<null | InputInvalidity>(
@@ -165,6 +165,7 @@ export const InputProof: FunctionComponent<InputProof> = ({
                         onChange={handleChange}
                     />
                     <label
+                        title="input-proof-file"
                         className="m-5 hover:cursor-pointer hover:border-gold hover:border-b-2 font-work-sans text-beige focus:outline-none bg-inherit"
                         htmlFor="proofFile"
                     >
@@ -172,7 +173,10 @@ export const InputProof: FunctionComponent<InputProof> = ({
                     </label>
                 </div>
             </div>
-            <div className="ml-5 text-gold mt-2 text-sm">
+            <div
+                title="valid-proof-file"
+                className="ml-5 text-gold mt-2 text-sm"
+            >
                 {fileInvalid ? `${fileName} ${fileInvalid}` : fileName}
             </div>
         </div>

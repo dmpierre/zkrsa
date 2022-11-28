@@ -7,8 +7,9 @@ import { sign } from '../utils/crypto';
 import bigInt from 'big-integer';
 //@ts-ignore
 import ab2str from 'arraybuffer-to-string';
+import { PropsSignedMessage } from '../types';
 
-export const SignedMessage: FunctionComponent<SignedMessage> = ({
+export const SignedMessage: FunctionComponent<PropsSignedMessage> = ({
     keypair,
     message,
     setSignedMessage,

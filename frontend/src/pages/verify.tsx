@@ -11,6 +11,7 @@ import snarkjs from 'snarkjs';
 //@ts-ignore
 import { unstringifyBigInts } from 'snarkjs/src/stringifybigint';
 import { InputProof } from '../components/Inputs';
+import { DownloadableProof, Proof, PropsAppPage } from '../types';
 
 const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     return snarkjs.original.isValid(
@@ -20,9 +21,7 @@ const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     );
 };
 
-const Verify: NextPage<AppPageProps> = ({
-    proof,
-    setproof,
+const Verify: NextPage<PropsAppPage> = ({
     vkeyState,
     setvkeyState,
     vkeyVerifier,
@@ -30,7 +29,8 @@ const Verify: NextPage<AppPageProps> = ({
     vkeyProof,
     setvkeyProof,
 }) => {
-    const [uploadedProof, setuploadedProof] = useState<any | null>(null);
+    const [uploadedProof, setuploadedProof] =
+        useState<DownloadableProof | null>(null);
     const [proofValidity, setproofValidity] = useState<boolean | null>(null);
     const [verifying, setverifying] = useState(false);
 
@@ -63,12 +63,14 @@ const Verify: NextPage<AppPageProps> = ({
                     <button
                         onClick={() => {
                             setverifying(true);
-                            const proofValidity = validity(
-                                vkeyVerifier,
-                                uploadedProof.proof,
-                                uploadedProof.publicSignals
-                            );
-                            setproofValidity(proofValidity);
+                            if (uploadedProof) {
+                                const proofValidity = validity(
+                                    vkeyVerifier,
+                                    uploadedProof.proof,
+                                    uploadedProof.publicSignals
+                                );
+                                setproofValidity(proofValidity);
+                            }
                             setverifying(false);
                         }}
                         className="font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2"
