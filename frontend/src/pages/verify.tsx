@@ -12,6 +12,7 @@ import snarkjs from 'snarkjs';
 import { unstringifyBigInts } from 'snarkjs/src/stringifybigint';
 import { InputProof } from '../components/Inputs';
 import { DownloadableProof, Proof, PropsAppPage } from '../types';
+import axios from 'axios';
 
 const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
     return snarkjs.original.isValid(
@@ -39,14 +40,6 @@ const Verify: NextPage<PropsAppPage> = ({
             <Title></Title>
             <Description></Description>
             <NavMenu></NavMenu>
-            <div className="flex justify-center my-4">
-                <StatusVKey vkeyState={vkeyState} vkey={vkeyProof}></StatusVKey>
-                <ButtonInitializeVerifier
-                    setvkeyState={setvkeyState}
-                    setvkeyVerifier={setvkeyVerifier}
-                    setvkeyProof={setvkeyProof}
-                ></ButtonInitializeVerifier>
-            </div>
             <div className="flex justify-center">
                 <InputProof setuploadedProof={setuploadedProof}></InputProof>
             </div>
@@ -61,9 +54,16 @@ const Verify: NextPage<PropsAppPage> = ({
                     </ThemeProvider>
                 ) : (
                     <button
-                        onClick={() => {
+                        onClick={async () => {
                             setverifying(true);
                             if (uploadedProof) {
+                                const vkeyVerifier = (
+                                    await axios.get(
+                                        process.env[
+                                            'NEXT_PUBLIC_VKEY_VERIFIER_URL'
+                                        ] as string
+                                    )
+                                ).data;
                                 const proofValidity = validity(
                                     vkeyVerifier,
                                     uploadedProof.proof,
@@ -74,7 +74,7 @@ const Verify: NextPage<PropsAppPage> = ({
                             setverifying(false);
                         }}
                         className="font-work-sans shadow-xl disabled:text-gray-400 disabled:border-gray-400 focus:outline-none text-beige border-2 rounded-lg border-beige hover:border-gold px-3 py-2"
-                        disabled={uploadedProof && vkeyVerifier ? false : true}
+                        disabled={uploadedProof ? false : true}
                     >
                         Verify
                     </button>
