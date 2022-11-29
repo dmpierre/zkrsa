@@ -1,7 +1,6 @@
 import {
     ButtonGenerateProof,
     ButtonExportProof,
-    ButtonInitializeVerifier,
 } from '../../src/components/Buttons';
 import { render } from '@testing-library/react';
 import React from 'react';

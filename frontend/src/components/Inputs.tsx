@@ -159,13 +159,13 @@ export const InputProof: FunctionComponent<PropsInputProof> = ({
             <div className="flex">
                 <div>
                     <input
+                        title="input-proof-file"
                         className="hidden"
                         type="file"
                         id="proofFile"
                         onChange={handleChange}
                     />
                     <label
-                        title="input-proof-file"
                         className="m-5 hover:cursor-pointer hover:border-gold hover:border-b-2 font-work-sans text-beige focus:outline-none bg-inherit"
                         htmlFor="proofFile"
                     >

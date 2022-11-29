@@ -8,19 +8,15 @@ import {
 } from '../../src/components/Inputs';
 import { InputInvalidity, isValidIntegerInput } from '../../src/utils/inputs';
 import userEvent from '@testing-library/user-event';
-import fs from 'fs';
+import {
+    validProofFile,
+    correctFileName,
+    invalidProofFile,
+    invalidProofFileError,
+} from '../../jest/setup';
 
 const mockSetValue = jest.fn((value: string) => {});
 const mockSetError = jest.fn((value: string) => {});
-
-const proof = fs.readFileSync('__mocks__/proofs/correct.json');
-const invalidProof = fs.readFileSync('__mocks__/proofs/incorrect.json');
-const correctFileName = 'correctProof.json';
-const incorrectFileName = 'incorrectProof.json';
-const validProofFile = new File([proof], correctFileName, { type: 'json' });
-const invalidProofFile = new File([invalidProof], incorrectFileName, {
-    type: 'json',
-});
 
 describe('Testing Inputs', () => {
     describe('InputText', () => {
@@ -79,22 +75,16 @@ describe('Testing Inputs', () => {
             );
             const input = container.getElementsByTagName('input');
             await userEvent.upload(input[0], validProofFile);
-            expect(await screen.findByText(correctFileName)).toHaveTextContent(
-                correctFileName
-            );
+            const findFileName = await screen.findByText(correctFileName);
         });
         it('should display error feedback upon invalid proof file', async () => {
+            const user = userEvent.setup();
             render(<InputProof setuploadedProof={() => {}} />);
-            // console.log(screen.getByTitle("input-proof-file"))
-            await userEvent.upload(
-                screen.getByTitle('input-proof-file'),
-                invalidProofFile
+            const input = screen.getByTitle('input-proof-file');
+            await user.upload(input, invalidProofFile);
+            const findProofError = await screen.findByText(
+                invalidProofFileError
             );
-            console.log(await screen.getByTitle('valid-proof-file'));
-            // console.log(await screen.findByText(`${incorrectFileName} ${InputInvalidity.INVALID_PROOF_FILE}`));
-            // console.log(await screen.getByText(`${incorrectFileName} ${InputInvalidity.INVALID_PROOF_FILE}`));
-
-            // .toHaveTextContent()
         });
     });
     describe('isValidIntegerInput', () => {
