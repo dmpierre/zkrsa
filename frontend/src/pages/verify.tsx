@@ -1,35 +1,14 @@
 import type { NextPage } from 'next';
-import { StatusVKey } from '../components/Status';
-import { ButtonInitializeVerifier, theme } from '../components/Buttons';
+import { theme } from '../components/Buttons';
 import { Title, NavMenu, Description, Footer } from '../components/Navigation';
 import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ThemeProvider } from '@mui/material/styles';
-
-//@ts-ignore
-import snarkjs from 'snarkjs';
-//@ts-ignore
-import { unstringifyBigInts } from 'snarkjs/src/stringifybigint';
 import { InputProof } from '../components/Inputs';
-import { DownloadableProof, Proof, PropsAppPage } from '../types';
-import axios from 'axios';
+import { DownloadableProof, PropsAppPage } from '../types';
+import { downloadVerifier, validity } from '../utils/zk';
 
-const validity = (vkeyVerifier: any, proof: any, publicSignals: any) => {
-    return snarkjs.original.isValid(
-        unstringifyBigInts(vkeyVerifier),
-        unstringifyBigInts(proof),
-        unstringifyBigInts(publicSignals)
-    );
-};
-
-const Verify: NextPage<PropsAppPage> = ({
-    vkeyState,
-    setvkeyState,
-    vkeyVerifier,
-    setvkeyVerifier,
-    vkeyProof,
-    setvkeyProof,
-}) => {
+const Verify: NextPage = ({}) => {
     const [uploadedProof, setuploadedProof] =
         useState<DownloadableProof | null>(null);
     const [proofValidity, setproofValidity] = useState<boolean | null>(null);
@@ -57,13 +36,11 @@ const Verify: NextPage<PropsAppPage> = ({
                         onClick={async () => {
                             setverifying(true);
                             if (uploadedProof) {
-                                const vkeyVerifier = (
-                                    await axios.get(
-                                        process.env[
-                                            'NEXT_PUBLIC_VKEY_VERIFIER_URL'
-                                        ] as string
-                                    )
-                                ).data;
+                                const vkeyVerifier = downloadVerifier(
+                                    process.env[
+                                        'NEXT_PUBLIC_VKEY_VERIFIER_URL'
+                                    ] as string
+                                );
                                 const proofValidity = validity(
                                     vkeyVerifier,
                                     uploadedProof.proof,

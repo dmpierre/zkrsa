@@ -18,12 +18,8 @@ import { PropsAppPage } from '../types';
 const Home: NextPage<PropsAppPage> = ({
     proof,
     setproof,
-    vkeyState,
-    setvkeyState,
     vkeyVerifier,
-    setvkeyVerifier,
     vkeyProof,
-    setvkeyProof,
 }) => {
     const [hash, sethash] = useState<null | string>(null);
     const [signature, setsignature] = useState<null | string>(null);
