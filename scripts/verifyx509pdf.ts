@@ -47,12 +47,27 @@ const main = () => {
     x509.publicKey,
     Buffer.from(signatureASN1, "binary")
   );
+
   /* 
     signed data is: SHA1_ID || M
     where SHA1_ID is (0x)30 21 30 09 06 05 2b 0e 03 02 1a 05 00 04 14 
     https://www.rfc-editor.org/rfc/rfc8017#section-9.2 (p. 46) 
   */
   assert(Buffer.compare(digest, decrypted.subarray(15, decrypted.length)) == 0);
+
+  // values that can be input to circuit
+  console.log({
+    derPaddedMsg: BigInt("0x" + decrypted.toString("hex")),
+    msg: BigInt("0x" + digest.toString("hex")),
+    sig: BigInt("0x" + Buffer.from(signatureASN1, "binary").toString("hex")),
+    mod: BigInt(
+      "0x" +
+        Buffer.from(
+          x509.publicKey.export({ format: "jwk" }).n!,
+          "base64"
+        ).toString("hex")
+    ),
+  });
 
   return 0;
 };
