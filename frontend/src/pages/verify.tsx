@@ -41,7 +41,7 @@ const Verify: NextPage = ({}) => {
                                         'NEXT_PUBLIC_VKEY_VERIFIER_URL'
                                     ] as string
                                 );
-                                const proofValidity = validity(
+                                const proofValidity = await validity(
                                     vkeyVerifier,
                                     uploadedProof.proof,
                                     uploadedProof.publicSignals
