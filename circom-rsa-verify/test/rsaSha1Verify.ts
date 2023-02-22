@@ -46,6 +46,5 @@ describe("Witness calculation", () => {
 
     //@ts-ignore
     const witness = rsa_pkvs1v15_circuit.calculateWitness(input);
-    fs.writeFileSync("./witness.json", JSON.stringify(witness));
   });
 });
